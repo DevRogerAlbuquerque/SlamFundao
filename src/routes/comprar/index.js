@@ -7,7 +7,7 @@ import { AiFillQuestionCircle } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { Sidebar } from 'primereact/sidebar';
 
-export default function Produtos()
+export default function ComprarProduto()
 {
     const navigate = useNavigate();
     return (<>
@@ -15,20 +15,17 @@ export default function Produtos()
         <Row>
             <Col className="mb-3">
                     <Row>
-                        <Col sm={4}>
+                        <Col sm={6}>
                             <GrupoCard height="70vh" header="CAMISETAS">
                                 <Carrossel height="65vh" onClick={() => navigate('/Compra')}/>
                             </GrupoCard>
                         </Col>
                         <Col sm={4}>
-                            <GrupoCard height="70vh" header="ECOBAGS">
-                                <Carrossel height="65vh" onClick={() => navigate('/Produtos')}/>
-                            </GrupoCard>
-                        </Col>
-                        <Col sm={4}>
-                            <GrupoCard height="70vh" header="MOLETONS">
-                                <Carrossel height="65vh" onClick={() => navigate('/Produtos')}/>
-                            </GrupoCard>
+                            <Row>
+                                <Col>
+                                    <h1>Teste</h1>
+                                </Col>
+                            </Row>
                         </Col>
                     </Row>
             </Col>

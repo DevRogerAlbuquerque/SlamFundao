@@ -1,0 +1,11 @@
+ h6 {
+    font-weight: bold;
+    color: purple;
+    font-size: 56px;
+    line-height: 1.18;
+}
+
+body {
+    background: rgb(255,255,255);
+background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(169,107,255,1) 35%, rgba(91,2,158,1) 100%);    
+}

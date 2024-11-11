@@ -8,8 +8,9 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from './routes/home';
 import Produtos from './routes/produtos';
+import ComprarProduto from './routes/comprar';
+import Home from './routes/home/index';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -19,6 +20,7 @@ root.render(
         <Route element={<App />} >
           <Route path='/' element={<Home />} />
           <Route path='/produtos' element={<Produtos />} />
+          <Route path='/compra' element={<ComprarProduto />} />
           </Route>
       </Routes>
     </BrowserRouter>

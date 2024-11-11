@@ -18,7 +18,7 @@ function Header() {
 
   return (
     <>
-      <Navbar style={{backgroundColor: 'purple'}} data-bs-theme="light"  expand="lg" className="header">
+      <Navbar style={{backgroundColor: 'purple', top: '0'}} data-bs-theme="light"  expand="lg" className="header">
       <Navbar.Brand as={Link} to="/" className="brand">
           Slam Fundão
         </Navbar.Brand>
@@ -28,7 +28,7 @@ function Header() {
             <Nav.Link as={Link} to="/sobre">
               Sobre
             </Nav.Link>
-            <Nav.Link as={Link} to="/catalogo">
+            <Nav.Link as={Link} to="/produtos">
               Catálogo
             </Nav.Link>
             <Nav.Link as={Link} to="/contato">
