@@ -19,7 +19,7 @@
   }
 
   .footer {
-    background-color: purple; /* Roxo */
+    background-color: #4E2759; /* Roxo */
   }
   
   .footer .social-icons a {
@@ -39,12 +39,12 @@
   }
 
   .p-card:hover {
-    background-color: purple;
+    background-color: #4E2759;
     color: white;
   }
 
   button {
-    background-color: purple;
+    background-color: #4E2759;
   }
   
 
@@ -96,7 +96,7 @@
   }
 
   .offcanvas-header, .offcanvas-body {
-    background-color: purple;
+    background-color: #4E2759;
     color: #FFD700;
   }
   

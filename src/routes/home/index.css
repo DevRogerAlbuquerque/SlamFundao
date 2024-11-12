@@ -1,11 +1,22 @@
- h6 {
+#home h1 {
     font-weight: bold;
-    color: purple;
+    color: #4E2759;
     font-size: 56px;
     line-height: 1.18;
 }
 
-body {
+#kit {
     background: rgb(255,255,255);
-background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(169,107,255,1) 35%, rgba(91,2,158,1) 100%);    
+    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(254,255,235,1) 35%, rgba(253,255,207,1) 100%);
+}
+
+.roxo {
+    font-weight: bold;
+    color: #4E2759;
+}
+
+#banner {
+    background: rgb(255,255,255);
+    margin-top: 56px;
+    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(169,107,255,1) 35%, rgba(91,2,158,1) 100%);    
 }

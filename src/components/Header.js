@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Navbar, Nav, Offcanvas, Button, ListGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
+import logoAmarelo from '../imagens/logoAmarelo.png';
 
 function Header() {
   const [showCart, setShowCart] = useState(false);
@@ -18,9 +19,9 @@ function Header() {
 
   return (
     <>
-      <Navbar style={{backgroundColor: 'purple', top: '0'}} data-bs-theme="light"  expand="lg" className="header">
+      <Navbar style={{backgroundColor: '#4E2759', top: '0'}} data-bs-theme="light"  expand="lg" className="header">
       <Navbar.Brand as={Link} to="/" className="brand">
-          Slam Fundão
+          <img src={logoAmarelo} style={{height: '30px'}}/>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
