@@ -5,7 +5,7 @@
     line-height: 1.18;
 }
 
-#kit {
+body {
     background: rgb(255,255,255);
     background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(254,255,235,1) 35%, rgba(253,255,207,1) 100%);
 }

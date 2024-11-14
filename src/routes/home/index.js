@@ -34,10 +34,11 @@ export const Home = () => {
                 <Row style={{height: '92vh'}}>
                     <Col md={6} className="d-flex flex-column align-items-center justify-content-center" >
                         
-                    <Carousel data-bs-theme="dark" onClick={() => navigate('/produtos')}>
+                    <Carousel data-bs-theme="dark" style={{border: '15px solid #4E2759', borderRadius: '5%'}}>
                         <Carousel.Item>
                             <img style={{height: '75vh'}}
                             className="w-100"
+                            onClick={() => navigate('/produtos')}
                             src={camisaBranca}
                             alt="First slide" />
                             <Carousel.Caption>
@@ -49,6 +50,7 @@ export const Home = () => {
                         <Carousel.Item>
                             <img style={{height: '75vh'}}
                             className="w-100"
+                            onClick={() => navigate('/produtos')}
                             src={camisaAmarela}
                             alt="First slide"
                             />
@@ -62,6 +64,7 @@ export const Home = () => {
                             <img style={{height: '75vh'}}
                             className="w-100"
                             src={camisaRoxa}
+                            onClick={() => navigate('/produtos')}
                             alt="First slide"
                             />
                             <Carousel.Caption>
