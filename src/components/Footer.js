@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
+import { FaFacebook, FaInstagram, FaTwitter, FaWhatsapp } from 'react-icons/fa';
 
 function Footer() {
   return (
@@ -13,7 +13,7 @@ function Footer() {
           <FaInstagram />
         </a>
         <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer">
-          <FaTwitter />
+          <FaWhatsapp />
         </a>
       </div>
       <p>Guarulhos, São Paulo</p>

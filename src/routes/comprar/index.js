@@ -1,35 +1,20 @@
-import { Col, Row } from "react-bootstrap";
-import Grid from "../../components/Grid";
-import GrupoCard from "../../components/GrupoCard";
-import Carrossel from "../../components/Carrossel";
-import { AiFillSchedule } from "react-icons/ai";
-import { AiFillQuestionCircle } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
-import { Sidebar } from 'primereact/sidebar';
+import { Col, Container, Row } from "react-bootstrap";
 
-export default function ComprarProduto()
+export default function ComprarProduto({
+    descricao,
+    preco,
+    item
+})
 {
-    const navigate = useNavigate();
     return (<>
-    <Grid>
+    <Container fluid>
         <Row>
             <Col className="mb-3">
                     <Row>
-                        <Col sm={6}>
-                            <GrupoCard height="70vh" header="CAMISETAS">
-                                <Carrossel height="65vh" onClick={() => navigate('/Compra')}/>
-                            </GrupoCard>
-                        </Col>
-                        <Col sm={4}>
-                            <Row>
-                                <Col>
-                                    <h1>Teste</h1>
-                                </Col>
-                            </Row>
-                        </Col>
+                        <Col md={6}></Col>
                     </Row>
             </Col>
         </Row>
-    </Grid>
+    </Container>
     </>)
 }

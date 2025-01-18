@@ -22,6 +22,18 @@ code {
   background: #f1f1f1; /* Cor de fundo do track do scroll */
 }
 
+
+.backgroundRoxo {
+  background: rgb(255,255,255);
+  margin-top: 56px;
+  background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(169,107,255,1) 35%, rgba(91,2,158,1) 100%);    
+}
+
+.gradienteEscuro {
+  background: rgb(255,255,255);
+background: linear-gradient(90deg, rgba(255,255,255,1) 4%, rgba(254,255,235,1) 7%, rgba(254,254,233,1) 13%, rgba(255,247,219,1) 29%, rgba(246,249,179,1) 59%, rgba(253,255,207,1) 100%);
+}
+
 ::-webkit-scrollbar-thumb {
   background-color: #4E2759; /* Cor da barra do scroll */
   border-radius: 10px; /* Arredondamento das bordas */
@@ -30,4 +42,9 @@ code {
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: #3a1f44; /* Tom mais escuro para o hover */
+}
+
+.descricaoProduto {
+  font-weight: bold;
+  text-align: center;
 }

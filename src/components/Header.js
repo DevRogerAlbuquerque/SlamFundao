@@ -4,18 +4,13 @@ import { Link } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
 import logoAmarelo from '../imagens/logoAmarelo.png';
 
-function Header() {
+function Header({itensCarrinho}) {
   const [showCart, setShowCart] = useState(false);
-  const [cartItems, setCartItems] = useState([
-    // Exemplo de itens no carrinho
-    { id: 1, name: 'Camiseta Off-White', quantity: 1, price: 50 },
-    { id: 2, name: 'Camiseta Amarela', quantity: 2, price: 45 },
-  ]);
 
   const handleShowCart = () => setShowCart(true);
   const handleCloseCart = () => setShowCart(false);
 
-  const totalAmount = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+  const totalAmount = itensCarrinho.reduce((total, item) => total + item.preco * item.quantidade, 0);
 
   return (
     <>
@@ -35,12 +30,10 @@ function Header() {
             <Nav.Link as={Link} to="/contato">
               Contato
             </Nav.Link>
-            {/* Alinhando o carrinho à direita */}
             <Button 
               variant="outline-light" 
               className="cart-button ms-auto" 
-              onClick={handleShowCart}
-            >
+              onClick={handleShowCart}>
               <FaShoppingCart /> Carrinho
             </Button>
           </Nav>
@@ -52,9 +45,9 @@ function Header() {
           <Offcanvas.Title>Seu Carrinho</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          {cartItems.length > 0 ? (
+          {itensCarrinho.length > 0 ? (
             <ListGroup>
-              {cartItems.map(item => (
+              {itensCarrinho.map(item => (
                 <ListGroup.Item key={item.id}>
                   {item.name} - {item.quantity}x R${item.price.toFixed(2)}
                 </ListGroup.Item>
