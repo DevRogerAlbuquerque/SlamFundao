@@ -14,7 +14,7 @@ export const Produto = ({src, alt, descricao}) => {
         </Col>
       </Row>
       <Row>
-        <Col className="descricaoProduto rounded-bottom mx-3" style={{backgroundColor: 'purple', color: 'white'}}>{descricao}</Col>
+        <Col className="descricaoProduto rounded-bottom mx-3" style={{backgroundColor: 'rgb(78, 39, 89)', color: 'white'}}>{descricao}</Col>
       </Row>
     </Container>
   );

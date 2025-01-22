@@ -22,8 +22,16 @@ code {
   background: #f1f1f1; /* Cor de fundo do track do scroll */
 }
 
-
 .backgroundRoxo {
+  background-color: rgb(78, 39, 89);
+}
+
+.backgroundRoxo * {
+  color: white;
+  font-weight: bold;
+}
+
+.roxoGradiente {
   background: rgb(255,255,255);
   margin-top: 56px;
   background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(169,107,255,1) 35%, rgba(91,2,158,1) 100%);    

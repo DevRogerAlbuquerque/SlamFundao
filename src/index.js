@@ -12,6 +12,7 @@ import Produtos from './routes/produtos';
 import ComprarProduto from './routes/comprar';
 import Home from './routes/home/index';
 import SobreNos from './routes/sobre';
+import Contato from './routes/contato';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -23,6 +24,7 @@ root.render(
           <Route path='/produtos' element={<Produtos />} />
           <Route path='/compra' element={<ComprarProduto />} />
           <Route path='/sobre' element={<SobreNos />} />
+          <Route path='/contato' element={<Contato />} />
           </Route>
       </Routes>
     </BrowserRouter>

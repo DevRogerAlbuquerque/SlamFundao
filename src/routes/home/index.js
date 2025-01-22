@@ -12,7 +12,7 @@ import integrantes from '../../imagens/integrantes.jpg';
 export const Home = () => {
     const navigate = useNavigate();
     return(<div id="home">
-                <Container fluid style={{height: '92vh'}} className="backgroundRoxo">
+                <Container fluid style={{height: '92vh'}} className="roxoGradiente">
                 <Row style={{height: '92vh'}}>
                     <Col md={6} className="d-flex flex-column align-items-center justify-content-center" >
                         
@@ -115,7 +115,6 @@ export const Home = () => {
                     </Col>
                 </Row>
             </Container>
-            <Footer />
     </div>);
 }
 

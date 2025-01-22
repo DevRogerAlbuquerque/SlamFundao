@@ -1,11 +1,5 @@
 import { Col, Row, Container } from "react-bootstrap";
-import Grid from "../../components/Grid";
-import GrupoCard from "../../components/GrupoCard";
-import Carrossel from "../../components/Carrossel";
-import { AiFillSchedule } from "react-icons/ai";
-import { AiFillQuestionCircle } from "react-icons/ai";
 import { useNavigate, useOutletContext } from "react-router-dom";
-import { Sidebar } from 'primereact/sidebar';
 import './index.css';
 import Produto from "../../components/Produto";
 import camisaBranca from '../../imagens/camisaBranca2.jpg';

@@ -31,10 +31,10 @@ function Header({itensCarrinho}) {
               Contato
             </Nav.Link>
             <Button 
-              variant="outline-light" 
+              variant="outline" 
               className="cart-button ms-auto" 
               onClick={handleShowCart}>
-              <FaShoppingCart /> Carrinho
+              <b><FaShoppingCart /> Carrinho</b>
             </Button>
           </Nav>
         </Navbar.Collapse>

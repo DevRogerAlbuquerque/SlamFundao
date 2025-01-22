@@ -1,6 +1,6 @@
 .header * {
     font-weight: bold;
-    color: #FFD700 !important; 
+    color: #FFC670 !important; 
     padding: 0px 5px;
   }
 
@@ -15,7 +15,7 @@
   }
   
   .navbar-dark .navbar-nav .nav-link:hover {
-    color: #FFD700;
+    color: #FFC670;
   }
 
   .footer {
@@ -29,12 +29,12 @@
   }
   
   .footer .social-icons a:hover {
-    color: #FFD700;
+    color: #FFC670;
   }
 
   .home {
     font-family: 'Roboto', sans-serif;
-    color: purple!important; /* Roxo */
+    color: rgb(78, 39, 89)!important; /* Roxo */
     background-color: #FFFFFF;
   }
 
@@ -54,6 +54,10 @@
   gap: 0.5rem;
 }
 
+.cart-button:hover{
+  color: white!important;
+}
+
 .cart-button svg {
   font-size: 1.2rem;
 }
@@ -65,11 +69,11 @@
   }
   
   .offcanvas-header {
-    border-bottom: 1px solid #FFD700; /* Linha amarela */
+    border-bottom: 1px solid #FFC670; /* Linha amarela */
   }
   
   .offcanvas-title {
-    color: #FFD700; /* Amarelo */
+    color: #FFC670; /* Amarelo */
   }
   
   .offcanvas-body {
@@ -83,25 +87,25 @@
   }
   
   .list-group-item:not(:last-child) {
-    border-bottom: 1px solid #FFD700; /* Linha divisória amarela */
+    border-bottom: 1px solid #FFC670; /* Linha divisória amarela */
   }
   
   .list-group-item:hover {
     background-color: #6A0DAD; /* Roxo mais claro ao passar o mouse */
-    color: #FFD700; /* Amarelo */
+    color: #FFC670; /* Amarelo */
   }
   
   .mt-3 h5 {
-    color: #FFD700; /* Total em amarelo */
+    color: #FFC670; /* Total em amarelo */
   }
 
   .offcanvas-header, .offcanvas-body {
     background-color: #4E2759;
-    color: #FFD700;
+    color: #FFC670;
   }
   
   .mt-3 button {
-    background-color: #FFD700; /* Botão amarelo */
+    background-color: #FFC670; /* Botão amarelo */
     color: #4B0082; /* Texto em roxo */
     border: none;
     width: 100%;
@@ -110,7 +114,7 @@
   }
   
   .mt-3 button:hover {
-    background-color: #FFC107; /* Amarelo mais claro ao passar o mouse */
+    background-color: #FFC670; /* Amarelo mais claro ao passar o mouse */
     color: #4B0082;
   }
   
@@ -122,7 +126,7 @@
   .intro-section h2,
   .catalog-section h2,
   .contact-section h2 {
-    color: #FFD700; /* Amarelo */
+    color: #FFC670; /* Amarelo */
   }
 
   

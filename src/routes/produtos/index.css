@@ -1,5 +1,5 @@
 .produto img {
-  border: 5px solid purple;
+  border: 5px solid rgb(78, 39, 89);
 }
 
 .produto {
@@ -19,13 +19,5 @@
   transform: translate(-50%, -50%);
   opacity: 0;
   transition: all 0.3s ease;
-  background-color: solid purple;;
-}
-
-.produto:hover img {
-  filter: blur(5px);
-}
-
-.produto:hover .comprar-button {
-  opacity: 1;
+  background-color: solid rgb(78, 39, 89);;
 }

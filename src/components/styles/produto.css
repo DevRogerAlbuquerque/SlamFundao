@@ -1,5 +1,5 @@
 .produto img {
-    border: 5px solid purple;
+    border: 5px solid rgb(78, 39, 89);
 }
 
 .produto {
@@ -28,8 +28,8 @@
   .produto:hover .comprar-button {
     opacity: 1;
     color: white;
-    background-color: purple;
-    border-color: purple;
+    background-color: rgb(78, 39, 89);
+    border-color: rgb(78, 39, 89);
     font-weight: bold;
   }
   

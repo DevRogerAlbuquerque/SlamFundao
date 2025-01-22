@@ -28,9 +28,8 @@ export const SobreNos = () => {
                 <Row>
                 <Col sm={12} md={6} className="d-flex flex-column align-items-center justify-content-center" >
                     
-                            <img style={{height: '75vh', border: '15px solid #4E2759', borderRadius: '5%'}}
+                            <img style={{border: '15px solid #4E2759', borderRadius: '5%'}}
                                 className="w-100 border-rounded"
-                                onClick={() => navigate('/produtos')}
                                 src={primeiraEdicao}
                                 alt="First slide" />
                             </Col>
@@ -66,7 +65,6 @@ export const SobreNos = () => {
                     <Col sm={12} md={4} className="d-flex flex-column align-items-center justify-content-center" >
                         <img style={{height: '75vh', border: '15px solid #4E2759', borderRadius: '5%'}}
                                 className="w-100 border-rounded"
-                                onClick={() => navigate('/produtos')}
                                 src={comoSurgiu}
                                 alt="First slide" />
                     </Col>
@@ -193,7 +191,6 @@ export const SobreNos = () => {
 </Row>
 
             </Container>
-            <Footer />
         </div>
     );
 }
