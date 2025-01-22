@@ -52,7 +52,8 @@ background: linear-gradient(90deg, rgba(255,255,255,1) 4%, rgba(254,255,235,1) 7
   background-color: #3a1f44; /* Tom mais escuro para o hover */
 }
 
-.descricaoProduto {
+.descricao {
   font-weight: bold;
   text-align: center;
+  text-transform: uppercase;
 }
