@@ -16,11 +16,23 @@ const Contato = () => {
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Dados do formulário:", formData);
-        alert("Mensagem enviada com sucesso!");
-    };
+        const scriptURL = "https://script.google.com/macros/s/AKfycbx9tMGXSAplqBCDLV13eOAPrifa7_d_1L5fgXoAwNzCeUeSO1zwIdnN1dQAk1inoB3ZPw/exec";
+
+        try {
+          const response = await fetch(scriptURL, {
+            method: "POST",
+            body: new URLSearchParams(formData),
+          });
+    
+          const result = await response.text();
+          alert(result); // Exibe a mensagem de sucesso
+        } catch (error) {
+          console.error("Erro ao enviar o formulário:", error);
+          alert("Ocorreu um erro ao enviar os dados.");
+        }
+      };
 
     return (
         <div id="formulario-contato">
@@ -36,7 +48,7 @@ const Contato = () => {
                 </Row>
                 <Row className="justify-content-center">
                     <Col md={8} className="d-flex flex-column align-items-center backgroundRoxo shadow-lg rounded-lg rounded p-3">
-                        <Form style={{ width: '100%' }} onSubmit={handleSubmit}>
+                        <Form onSubmit={handleSubmit} style={{ width: '100%' }}>
                             <Row className="mb-4 mt-3">
                                 <Col md="6">
                                     <Form.Group controlId="formNome">

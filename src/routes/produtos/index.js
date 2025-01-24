@@ -63,7 +63,9 @@ export default function Produtos() {
                         </Col>
                         <Col md={8} className="backgroundRoxo" style={{borderRadius: '5%'}}>
                                 <Container fluid>
-                                    
+                                    <Row>
+                                        <Col md={6} style={{border: '5px solid #FFC670', borderRadius: '5%'}}>A</Col>
+                                    </Row>
                                 </Container>
                         </Col>
                     </Row>

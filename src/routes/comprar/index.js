@@ -6,6 +6,7 @@ export default function ComprarProduto({
     item
 })
 {
+    const urlGoogleApps = "https://script.google.com/macros/s/AKfycbyBhsI87Mpoz_ar099mIW4pW0H_edx2j9u5aoHbKim2F23KEEnSfNQHD3MiNMUnT7JbvA/exec";
     return (<>
     <Container fluid>
         <Row>
