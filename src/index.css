@@ -23,12 +23,32 @@ code {
 }
 
 .backgroundRoxo {
-  background-color: rgb(78, 39, 89);
+  background-color: rgb(78, 39, 89)!important;
+  border: rgb(78, 39, 89)!important;
+  color: white!important;
 }
 
-.backgroundRoxo * {
-  color: white;
-  font-weight: bold;
+.backgroundAmarelo button * {
+  color: #FFC670!important;
+}
+
+.backgroundAmarelo button {
+  background-color: rgb(78, 39, 89)!important;
+  border-radius: 51%;
+}
+
+button.backgroundRoxo:active {
+  transform: scale(0.95);
+  background-color: #FFC670!important;
+  color: rgb(78, 39, 89)!important;
+  animation: click-effect 3s ease-in-out forwards;
+}
+
+.backgroundAmarelo {
+  background-color: #FFC670!important;
+  border: #FFC670!important;
+  color: rgb(78, 39, 89)!important;
+  font-weight: bold!important;
 }
 
 .roxoGradiente {
@@ -49,11 +69,58 @@ background: linear-gradient(90deg, rgba(255,255,255,1) 4%, rgba(254,255,235,1) 7
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #3a1f44; /* Tom mais escuro para o hover */
+  background-color: rgb(78, 39, 89); /* Tom mais escuro para o hover */
 }
 
 .descricao {
   font-weight: bold;
   text-align: center;
   text-transform: uppercase;
+}
+/* Estilos personalizados para o Range */
+.custom-range::-webkit-slider-runnable-track {
+  background: rgb(78, 39, 89)!important;
+  height: 8px; /* Ajuste a altura do track, se necessário */
+}
+
+.custom-range::-moz-range-track {
+  background: rgb(78, 39, 89)!important;
+  height: 8px;
+}
+
+.custom-range::-ms-track {
+  background: rgb(78, 39, 89)!important;
+  border-color: rgb(78, 39, 89)!important;
+  height: 8px;
+}
+
+.custom-range::-webkit-slider-thumb {
+  background: #FFC670 !important;  /* Cor do botão */
+  border: 2px solid rgb(78, 39, 89) !important; /* Borda do botão */
+  width: 20px;  /* Largura do botão */
+  height: 20px; /* Altura do botão */
+  border-radius: 50%; /* Torna o botão redondo */
+  cursor: pointer;
+}
+
+.custom-range::-moz-range-thumb {
+  background: #FFC670 !important; /* Cor do botão */
+  border: 2px solid rgb(78, 39, 89) !important; /* Borda do botão */
+  width: 20px; 
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.custom-range::-ms-thumb {
+  background: #FFC670 !important; /* Cor do botão */
+  border: 2px solid rgb(78, 39, 89) !important; /* Borda do botão */
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.custom-range {
+  color: rgb(78, 39, 89)!important; /* Para o botão, se necessário */
 }

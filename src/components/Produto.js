@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export const Produto = ({src, alt, descricao, valor, onClick}) => {
   const options = { style: 'currency', currency: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 3 }
-  const formatNumber = new Intl.NumberFormat('pt-BR', options)
+  const formatNumber = new Intl.NumberFormat('pt-BR', options);
   return (
     <Container className="produto" style={{ width: '100%' }} fluid>
       <Row>

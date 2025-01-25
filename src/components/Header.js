@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import { Navbar, Nav, Offcanvas, Button, ListGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { FaShoppingCart } from 'react-icons/fa';
+import { FaShoppingCart, FaTimes } from 'react-icons/fa';
 import logoAmarelo from '../imagens/logoAmarelo.png';
+import { FaCartShopping } from 'react-icons/fa6';
 
-function Header({itensCarrinho}) {
+function Header({itensCarrinho, removerItemCarrinho}) {
   const [showCart, setShowCart] = useState(false);
 
   const handleShowCart = () => setShowCart(true);
   const handleCloseCart = () => setShowCart(false);
+  const options = { style: 'currency', currency: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 3 }
+  const formatNumber = new Intl.NumberFormat('pt-BR', options);
 
-  const totalAmount = itensCarrinho.reduce((total, item) => total + item.preco * item.quantidade, 0);
+  const valorTotal = itensCarrinho.reduce((total, item) => total + item.valor * item.quantidade, 0);
 
   return (
     <>
@@ -42,14 +45,17 @@ function Header({itensCarrinho}) {
 
       <Offcanvas show={showCart} onHide={handleCloseCart} placement="end">
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Seu Carrinho</Offcanvas.Title>
+          <Offcanvas.Title><FaCartShopping /> Seu Carrinho</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           {itensCarrinho.length > 0 ? (
             <ListGroup>
-              {itensCarrinho.map(item => (
-                <ListGroup.Item key={item.id}>
-                  {item.name} - {item.quantity}x R${item.price.toFixed(2)}
+              {itensCarrinho.map((item, index) => (
+                <ListGroup.Item key={index}>
+                  <div class="grid gap-0 d-flex">
+                    <div class="p-2 g-col-6">{item.nome} - {item.tamanho} - <b>{item.quantidade} x {formatNumber.format(item.valor)}</b></div>
+                    <div class="p-2 g-col-6"><Button onClick={() => removerItemCarrinho(index)} className='backgroundRoxo'><FaTimes /></Button></div>
+                  </div>
                 </ListGroup.Item>
               ))}
             </ListGroup>
@@ -57,9 +63,12 @@ function Header({itensCarrinho}) {
             <p>O carrinho está vazio.</p>
           )}
           <div className="mt-3">
-            <h5>Total: R${totalAmount.toFixed(2)}</h5>
+            <h5>Total: {formatNumber.format(valorTotal)}</h5>
             <Button variant="success" className="mt-2">
               Finalizar Compra
+            </Button>
+            <Button style={{backgroundColor: 'white'}} className="mt-2">
+              Esvaziar Carrinho
             </Button>
           </div>
         </Offcanvas.Body>

@@ -19,7 +19,7 @@
   }
 
   .footer {
-    background-color: #4E2759; /* Roxo */
+    background-color: rgb(78, 39, 89); /* Roxo */
   }
   
   .footer .social-icons a {
@@ -39,12 +39,12 @@
   }
 
   .p-card:hover {
-    background-color: #4E2759;
+    background-color: rgb(78, 39, 89);
     color: white;
   }
 
   button {
-    background-color: #4E2759;
+    background-color: rgb(78, 39, 89);
   }
   
 
@@ -64,7 +64,7 @@
 
 /* Estilo geral do Offcanvas */
 .offcanvas {
-    background-color: #4B0082; /* Roxo intenso */
+    background-color: rgb(78, 39, 89); /* Roxo intenso */
     color: white;
   }
   
@@ -81,7 +81,7 @@
   }
   
   .list-group-item {
-    background-color: #4B0082; /* Roxo intenso */
+    background-color: rgb(78, 39, 89); /* Roxo intenso */
     color: white;
     border: none;
   }
@@ -91,7 +91,7 @@
   }
   
   .list-group-item:hover {
-    background-color: #6A0DAD; /* Roxo mais claro ao passar o mouse */
+    background-color: rgb(78, 39, 89); /* Roxo mais claro ao passar o mouse */
     color: #FFC670; /* Amarelo */
   }
   
@@ -100,13 +100,13 @@
   }
 
   .offcanvas-header, .offcanvas-body {
-    background-color: #4E2759;
+    background-color: rgb(78, 39, 89);
     color: #FFC670;
   }
   
   .mt-3 button {
     background-color: #FFC670; /* Botão amarelo */
-    color: #4B0082; /* Texto em roxo */
+    color: rgb(78, 39, 89); /* Texto em roxo */
     border: none;
     width: 100%;
     font-weight: bold;
@@ -115,7 +115,7 @@
   
   .mt-3 button:hover {
     background-color: #FFC670; /* Amarelo mais claro ao passar o mouse */
-    color: #4B0082;
+    color: rgb(78, 39, 89);
   }
   
 

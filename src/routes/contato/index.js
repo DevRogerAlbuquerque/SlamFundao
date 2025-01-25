@@ -1,9 +1,13 @@
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { Button, Col, Container, Form, Row, Spinner } from "react-bootstrap";
 import Footer from '../../components/Footer';
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { FaCheck } from "react-icons/fa";
+import ReactInputMask from "react-input-mask";
+import { Toast } from "primereact/toast";
 
 const Contato = () => {
+    const [loading, setLoading] = useState(false);
+    const toast = useRef();
     const [formData, setFormData] = useState({
         nome: "",
         email: "",
@@ -16,26 +20,49 @@ const Contato = () => {
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e) => 
+    {
         e.preventDefault();
         const scriptURL = "https://script.google.com/macros/s/AKfycbx9tMGXSAplqBCDLV13eOAPrifa7_d_1L5fgXoAwNzCeUeSO1zwIdnN1dQAk1inoB3ZPw/exec";
-
-        try {
+        setLoading(true);
+        try 
+        {
           const response = await fetch(scriptURL, {
             method: "POST",
             body: new URLSearchParams(formData),
           });
     
           const result = await response.text();
-          alert(result); // Exibe a mensagem de sucesso
-        } catch (error) {
-          console.error("Erro ao enviar o formulário:", error);
-          alert("Ocorreu um erro ao enviar os dados.");
+
+          toast.current.show({ severity: 'success', summary: 'Slam Fundão informa:', 
+            detail: result,
+            life: 6000,
+            className: 'backgroundAmarelo' })
+        } 
+        catch (error) 
+        {
+            toast.current.show({ severity: 'error', summary: 'Ops!', 
+                detail: "Infelizmente sua tentativa de contato deu errado.",
+                life: 6000,
+                className: 'backgroundAmarelo' });
+
+            window.confirm("Já que deu problema, você deseja ser redirecionado para a nossa página no instagram?")
+                window.open("https://www.instagram.com/slamfundao");
+        }
+        finally 
+        {
+            setFormData({
+                nome: "",
+                email: "",
+                telefone: "",
+                mensagem: "",
+            });
+            setLoading(false);
         }
       };
 
     return (
-        <div id="formulario-contato">
+        <>
             <Container fluid style={{ height: '90vh', marginTop: '10vh' }}>
             <Row>
                     <Col md={12} className="d-flex flex-column align-items-center justify-content-center">
@@ -70,6 +97,8 @@ const Contato = () => {
                                             type="tel"
                                             placeholder="Digite seu telefone com DDD"
                                             name="telefone"
+                                            as={ReactInputMask}
+                                            mask="(**) *****-****"
                                             value={formData.telefone}
                                             onChange={handleChange}
                                         />
@@ -100,13 +129,23 @@ const Contato = () => {
                                 />
                             </Form.Group>
                             <div className="text-center">
-                                <Button variant="warning" type="submit">Enviar Mensagem</Button>
+                                <Button disabled={loading} variant="warning" type="submit" className="backgroundAmarelo">{loading ? "Enviando seu contato..." : "Enviar Contato"}  
+                                    {loading && <Spinner
+                                        as="span"
+                                        animation="border"
+                                        size="sm"
+                                        role="status"
+                                        aria-hidden="true"
+                                        />}
+                                </Button>
                             </div>
                         </Form>
                     </Col>
                 </Row>
             </Container>
-        </div>
+            
+            <Toast ref={toast} position="center" />
+        </>
     );
 };
 

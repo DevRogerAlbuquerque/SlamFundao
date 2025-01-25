@@ -117,79 +117,77 @@ export const SobreNos = () => {
                     <h3 className="roxo text-center">VOCÊ SABIA QUE PODE TER O FUNDÃO NA SUA ORGANIZAÇÃO?</h3>
                 </Row>
                 <Row>
-    {/* Coluna de Texto */}
-    <Col md={12} className="d-flex flex-column align-items-center justify-content-center mb-4">
-        <p
-            style={{
-                textAlign: 'center',
-                maxWidth: '800px',
-                fontSize: '20px',
-                color: '#4E2759',
-            }}
-        >
-            O Slam Fundão também atua fora das batalhas, promovendo <b>oficinas de escrita criativa</b> para ensinar e inspirar mais pessoas, 
-            principalmente jovens estudantes. Essas oficinas são <b>um espaço onde a poesia se torna acessível</b>, e novas formas de expressão são exploradas, incentivando o autoconhecimento e a valorização das histórias de cada participante.
+                    <Col md={12} className="d-flex flex-column align-items-center justify-content-center mb-4">
+                        <p
+                            style={{
+                                textAlign: 'center',
+                                maxWidth: '800px',
+                                fontSize: '20px',
+                                color: '#4E2759',
+                            }}
+                        >
+                            O Slam Fundão também atua fora das batalhas, promovendo <b>oficinas de escrita criativa</b> para ensinar e inspirar mais pessoas, 
+                            principalmente jovens estudantes. Essas oficinas são <b>um espaço onde a poesia se torna acessível</b>, e novas formas de expressão são exploradas, incentivando o autoconhecimento e a valorização das histórias de cada participante.
 
-            Até o momento, o Slam Fundão já realizou<b> mais de 20 oficinas em escolas</b>, ONGs, universidades e CEUs. 
-            Entre as instituições atendidas, destacam-se as escolas estaduais Grot, Idalina e Storopoli,
-             além de muitas outras localizadas em bairros periféricos.
+                            Até o momento, o Slam Fundão já realizou<b> mais de 20 oficinas em escolas</b>, ONGs, universidades e CEUs. 
+                            Entre as instituições atendidas, destacam-se as escolas estaduais Grot, Idalina e Storopoli,
+                            além de muitas outras localizadas em bairros periféricos.
 
-            Com essas iniciativas, <b>buscamos levar a poesia e a literatura para quem mais precisa</b>, 
-            fortalecendo a criatividade, a autoestima e a conexão com a comunidade. 
-        </p>
-        <h5 className="roxo text-center">Se você é aluno, professor ou parte de uma organização e deseja levar nossas oficinas para o seu espaço, entre em contato e venha fazer parte dessa transformação cultural!</h5>
-    </Col>
+                            Com essas iniciativas, <b>buscamos levar a poesia e a literatura para quem mais precisa</b>, 
+                            fortalecendo a criatividade, a autoestima e a conexão com a comunidade. 
+                        </p>
+                        <h5 className="roxo text-center">Se você é aluno, professor ou parte de uma organização e deseja levar nossas oficinas para o seu espaço, entre em contato e venha fazer parte dessa transformação cultural!</h5>
+                    </Col>
 
-    {/* Coluna com as Imagens */}
-    <Col sm={12} md={12} className="d-flex flex-column align-items-center justify-content-center">
-        <Container fluid>
-            <Row className="d-flex justify-content-center align-items-end">
-                {/* Imagem menor à esquerda */}
-                <Col xs={4} md={3} className="d-flex justify-content-end">
-                    <img
-                        src={imagemOficina}
-                        alt="Imagem à esquerda"
-                        style={{
-                            width: '80%',
-                            height: 'auto',border: '15px solid #4E2759', borderRadius: '5%',
-                            boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
-                            transform: 'translateY(20%)',
-                        }}
-                    />
-                </Col>
+                    {/* Coluna com as Imagens */}
+                    <Col sm={12} md={12} className="d-flex flex-column align-items-center justify-content-center">
+                        <Container fluid>
+                            <Row className="d-flex justify-content-center align-items-end">
+                                {/* Imagem menor à esquerda */}
+                                <Col xs={4} md={3} className="d-flex justify-content-end">
+                                    <img
+                                        src={imagemOficina}
+                                        alt="Imagem à esquerda"
+                                        style={{
+                                            width: '80%',
+                                            height: 'auto',border: '15px solid #4E2759', borderRadius: '5%',
+                                            boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
+                                            transform: 'translateY(20%)',
+                                        }}
+                                    />
+                                </Col>
 
-                {/* Imagem central maior */}
-                <Col xs={4} md={6} className="d-flex justify-content-center">
-                    <img
-                        src={oficinaMaior}
-                        alt="Imagem central"
-                        style={{
-                            width: '100%',
-                            height: 'auto', border: '15px solid #4E2759', borderRadius: '5%',
-                            boxShadow: '0px 6px 12px rgba(0, 0, 0, 0.3)',
-                            zIndex: 1,
-                        }}
-                    />
-                </Col>
+                                {/* Imagem central maior */}
+                                <Col xs={4} md={6} className="d-flex justify-content-center">
+                                    <img
+                                        src={oficinaMaior}
+                                        alt="Imagem central"
+                                        style={{
+                                            width: '100%',
+                                            height: 'auto', border: '15px solid #4E2759', borderRadius: '5%',
+                                            boxShadow: '0px 6px 12px rgba(0, 0, 0, 0.3)',
+                                            zIndex: 1,
+                                        }}
+                                    />
+                                </Col>
 
-                {/* Imagem menor à direita */}
-                <Col xs={4} md={3} className="d-flex justify-content-start">
-                    <img
-                        src={oficinaPimentas}
-                        alt="Imagem à direita"
-                        style={{
-                            width: '80%',
-                            height: 'auto',border: '15px solid #4E2759', borderRadius: '5%',
-                            boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
-                            transform: 'translateY(20%)',
-                        }}
-                    />
-                </Col>
-            </Row>
-        </Container>
-    </Col>
-</Row>
-
+                                {/* Imagem menor à direita */}
+                                <Col xs={4} md={3} className="d-flex justify-content-start">
+                                    <img
+                                        src={oficinaPimentas}
+                                        alt="Imagem à direita"
+                                        style={{
+                                            width: '80%',
+                                            height: 'auto',border: '15px solid #4E2759', borderRadius: '5%',
+                                            boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
+                                            transform: 'translateY(20%)',
+                                        }}
+                                    />
+                                </Col>
+                            </Row>
+                        </Container>
+                    </Col>
+                </Row>
             </Container>
         </div>
     );
