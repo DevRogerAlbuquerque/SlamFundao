@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Navbar, Nav, Offcanvas, Button, ListGroup } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { FaShoppingCart, FaTimes } from 'react-icons/fa';
 import logoAmarelo from '../imagens/logoAmarelo.png';
 import { FaCartShopping } from 'react-icons/fa6';
@@ -14,6 +14,7 @@ function Header({itensCarrinho, removerItemCarrinho}) {
   const formatNumber = new Intl.NumberFormat('pt-BR', options);
 
   const valorTotal = itensCarrinho.reduce((total, item) => total + item.valor * item.quantidade, 0);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -64,10 +65,10 @@ function Header({itensCarrinho, removerItemCarrinho}) {
           )}
           <div className="mt-3">
             <h5>Total: {formatNumber.format(valorTotal)}</h5>
-            <Button variant="success" className="mt-2">
+            <Button onClick={() => navigate('/compra')} className="mt-2 backgroundAmarelo" disabled={!itensCarrinho.length}>
               Finalizar Compra
             </Button>
-            <Button style={{backgroundColor: 'white'}} className="mt-2">
+            <Button style={{backgroundColor: 'white', color: 'rgb(78, 39, 89)'}} className="mt-2" disabled={!itensCarrinho.length}>
               Esvaziar Carrinho
             </Button>
           </div>

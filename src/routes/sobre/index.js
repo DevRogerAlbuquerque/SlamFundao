@@ -13,7 +13,7 @@ export const SobreNos = () => {
     const navigate = useNavigate();
     return (
         <div id="home">
-            <Container fluid style={{ height: '90vh', marginTop: '10vh' }} className="gradienteEscuro">
+            <Container fluid style={{ minHeight: '90vh', marginTop: '10vh' }} className="gradienteEscuro">
                 <Row style={{ height: '92vh' }}>
                     <Col md={12} className="d-flex flex-column align-items-center justify-content-center">
                         <img height={'200px'} src={logo} alt="Logo Slam Fundão" />
@@ -21,7 +21,7 @@ export const SobreNos = () => {
                     </Col>
                 </Row>
             </Container>
-            <Container fluid style={{ height: '100vh' }}>
+            <Container fluid style={{ minHeight: '100vh' }}>
                 <Row>
                     <h1 className="roxo text-center">O QUE É O SLAM FUNDÃO?</h1>
                 </Row>
@@ -44,34 +44,54 @@ export const SobreNos = () => {
                     </Col>
                 </Row>
             </Container>
-            <Container fluid style={{ height: '100vh' }}>
-                <Row>
-                    <h1 className="roxo text-center">COMO SURGIU?</h1>
-                </Row>
-                <Row>
-                    <Col md={8} className="d-flex flex-column align-items-center justify-content-center">
-                        <p style={{ textAlign: 'center', maxWidth: '800px', fontSize: '20px', color: '#4E2759' }}>
-                        O Slam Fundão nasce de uma<b> necessidade urgente de democratizar</b> o acesso à cultura e 
-                        à literatura nas periferias de Guarulhos. Criado como uma 
-                        <b> resposta ao isolamento cultural</b> enfrentado por muitos jovens e adolescentes, o Slam oferece 
-                        um<b> espaço seguro e inclusivo</b> onde a poesia falada se torna um instrumento 
-                        poderoso para a expressão de sentimentos, vivências e perspectivas.  
-                        <b>Com o objetivo de levar voz e lazer para as comunidades periféricas</b>, o Slam Fundão realizou sua primeira 
-                        edição no início de 2023. 
-                        Desde então, tem transformado o cenário cultural da região, promovendo <b>encontros que não apenas celebram 
-                        a arte, mas também fortalecem os laços comunitários</b>, proporcionando oportunidades para que talentos emergentes se destaquem e compartilhem suas histórias através da poesia.
-                        </p>
-                    </Col>
-                    <Col sm={12} md={4} className="d-flex flex-column align-items-center justify-content-center" >
-                        <img style={{height: '75vh', border: '15px solid #4E2759', borderRadius: '5%'}}
-                                className="w-100 border-rounded"
-                                src={comoSurgiu}
-                                alt="First slide" />
-                    </Col>
-                </Row>
-            </Container>
+            <Container fluid style={{ minHeight: '100vh' }}>
+  <Row>
+    <h1 className="roxo text-center">COMO SURGIU?</h1>
+  </Row>
+  <Row>
+    <Col
+      sm={12}
+      md={4}
+      className="d-flex flex-column align-items-center justify-content-center order-md-last order-sm-first"
+    >
+      <img
+        style={{ height: '75vh', border: '15px solid #4E2759', borderRadius: '5%' }}
+        className="w-100 border-rounded"
+        src={comoSurgiu}
+        alt="First slide"
+      />
+    </Col>
+    <Col
+      sm={{ order: 'last', size: 12 }}
+      md={{ order: 'first', size: 8 }}
+      className="d-flex flex-column align-items-center justify-content-center"
+    >
+      <p
+        style={{
+          textAlign: 'center',
+          maxWidth: '800px',
+          fontSize: '20px',
+          color: '#4E2759',
+        }}
+      >
+        O Slam Fundão nasce de uma<b> necessidade urgente de democratizar</b> o acesso
+        à cultura e à literatura nas periferias de Guarulhos. Criado como uma
+        <b> resposta ao isolamento cultural</b> enfrentado por muitos jovens e
+        adolescentes, o Slam oferece um<b> espaço seguro e inclusivo</b> onde a poesia
+        falada se torna um instrumento poderoso para a expressão de sentimentos,
+        vivências e perspectivas. <b>Com o objetivo de levar voz e lazer para as
+        comunidades periféricas</b>, o Slam Fundão realizou sua primeira edição no
+        início de 2023. Desde então, tem transformado o cenário cultural da região,
+        promovendo <b>encontros que não apenas celebram a arte, mas também fortalecem
+        os laços comunitários</b>, proporcionando oportunidades para que talentos
+        emergentes se destaquem e compartilhem suas histórias através da poesia.
+      </p>
+    </Col>
+  </Row>
+</Container>
 
-            <Container fluid style={{ height: '100vh' }}>
+
+            <Container fluid style={{ minHeight: '100vh' }}>
                 <Row>
                     <h1 className="roxo text-center">EDIÇÕES</h1>
                 </Row>
@@ -111,7 +131,7 @@ export const SobreNos = () => {
 
             </Container>
 
-            <Container fluid style={{ height: '200vh' }}>
+            <Container fluid style={{ minHeight: '200vh' }}>
                 <Row>
                     <h1 className="roxo text-center">OFICINAS</h1>
                     <h3 className="roxo text-center">VOCÊ SABIA QUE PODE TER O FUNDÃO NA SUA ORGANIZAÇÃO?</h3>
@@ -144,7 +164,7 @@ export const SobreNos = () => {
                         <Container fluid>
                             <Row className="d-flex justify-content-center align-items-end">
                                 {/* Imagem menor à esquerda */}
-                                <Col xs={4} md={3} className="d-flex justify-content-end">
+                                <Col xs={4} md={3} className="d-none d-md-flex justify-content-end">
                                     <img
                                         src={imagemOficina}
                                         alt="Imagem à esquerda"
@@ -158,7 +178,7 @@ export const SobreNos = () => {
                                 </Col>
 
                                 {/* Imagem central maior */}
-                                <Col xs={4} md={6} className="d-flex justify-content-center">
+                                <Col md={6} sm={12} className="d-flex justify-content-center">
                                     <img
                                         src={oficinaMaior}
                                         alt="Imagem central"
@@ -172,7 +192,7 @@ export const SobreNos = () => {
                                 </Col>
 
                                 {/* Imagem menor à direita */}
-                                <Col xs={4} md={3} className="d-flex justify-content-start">
+                                <Col xs={4} md={3} className="d-none d-md-flex justify-content-start">
                                     <img
                                         src={oficinaPimentas}
                                         alt="Imagem à direita"

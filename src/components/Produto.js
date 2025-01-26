@@ -10,7 +10,7 @@ export const Produto = ({src, alt, descricao, valor, onClick}) => {
     <Container className="produto" style={{ width: '100%' }} fluid>
       <Row>
         <Col className="p-0 mx-3">
-          <img src={src} height={"470px"} alt={alt} />
+          <img style={{borderRadius: '5% 0%', objectFit: 'cover'}} src={src} height={"470px"} alt={alt} />
           <Button className="comprar-button" onClick={onClick}><FaEye /> Visualizar</Button>
         </Col>
       </Row>

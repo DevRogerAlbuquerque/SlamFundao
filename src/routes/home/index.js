@@ -12,8 +12,8 @@ import integrantes from '../../imagens/integrantes.jpg';
 export const Home = () => {
     const navigate = useNavigate();
     return(<div id="home">
-                <Container fluid style={{height: '92vh'}} className="roxoGradiente">
-                <Row style={{height: '92vh'}}>
+                <Container fluid style={{minHeight: '92vh'}} className="roxoGradiente">
+                <Row style={{minHeight: '92vh'}}>
                     <Col md={6} className="d-flex flex-column align-items-center justify-content-center" >
                         
                         <img height={'200px'} src={logo}/>
@@ -31,8 +31,8 @@ export const Home = () => {
                     </Col>
                 </Row>
             </Container>
-            <Container fluid style={{height: '92vh'}} id="kit">
-                <Row style={{height: '92vh'}}>
+            <Container fluid style={{minHeight: '92vh'}} id="kit">
+                <Row style={{minHeight: '92vh'}}>
                     <Col sm={12} md={6} className="d-flex flex-column align-items-center justify-content-center" >
                         
                     <Carousel data-bs-theme="dark" style={{border: '15px solid #4E2759', borderRadius: '5%'}}>
@@ -92,7 +92,7 @@ export const Home = () => {
                     </Col>
                 </Row>
             </Container>
-            <Container fluid style={{ height: '90vh' }}>
+            <Container fluid style={{ minHeight: '90vh' }}>
                 <Row>
                     <Col md={7} className="d-flex flex-column align-items-center justify-content-center">
                         <h1 className="roxo">O QUE É O SLAM FUNDÃO?</h1>

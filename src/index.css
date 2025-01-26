@@ -44,11 +44,19 @@ button.backgroundRoxo:active {
   animation: click-effect 3s ease-in-out forwards;
 }
 
+.bordaRoxa {
+  border: 2px solid rgb(78, 39, 89)!important;
+}
+
 .backgroundAmarelo {
   background-color: #FFC670!important;
-  border: #FFC670!important;
+  border: #FFC670;
   color: rgb(78, 39, 89)!important;
   font-weight: bold!important;
+}
+
+.bordaAmarela {
+  border: #FFC670!important;
 }
 
 .roxoGradiente {

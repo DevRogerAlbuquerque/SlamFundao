@@ -41,11 +41,11 @@ export default function Produtos() {
             <Container fluid style={{ height: '90vh', marginTop: '10vh' }}>
                 {catalogoVisible && 
                     <><Row>
-                        <Col><h1 className="roxo mt-3">DROP DO FUNDÃO</h1></Col>
+                        <Col><h1 className="roxo d-flex align-items-center justify-content-center mt-3">DROP DO FUNDÃO</h1></Col>
                     </Row>
                     <Row>
                         {produtos.map((produto, index) => (
-                            <Col
+                            <Col className="mb-3"
                                 key={index}
                                 xs={12}
                                 sm={12}

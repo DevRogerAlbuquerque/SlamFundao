@@ -8,10 +8,17 @@ function App() {
   const [itensCarrinho, setItensCarrinho] = useState([]);
 
   const adicionarItensCarrinho = (item) => {
-    const produtos = [...itensCarrinho];
-    produtos.push(item);
+    let produtos = [...itensCarrinho];
+    const produtoExistente = produtos.find(x => x.nome === item.nome && x.tamanho === item.tamanho);
+  
+    if (produtoExistente)
+      produtoExistente.quantidade = parseInt(produtoExistente.quantidade) + parseInt(item.quantidade);
+    else
+      produtos.push(item);
+    
     setItensCarrinho(produtos);
   }
+  
 
   const removerItemCarrinho = (posicao) => setItensCarrinho(itensCarrinho.filter((produto, index) => index != posicao));
 
@@ -19,7 +26,7 @@ function App() {
     <>
     
     <Header itensCarrinho={itensCarrinho} removerItemCarrinho={removerItemCarrinho} />
-      <Outlet context={{adicionarItensCarrinho}} />
+      <Outlet context={{adicionarItensCarrinho, itensCarrinho}} />
       <Footer />
     </>
   );
