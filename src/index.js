@@ -13,6 +13,7 @@ import ComprarProduto from './routes/comprar';
 import Home from './routes/home/index';
 import SobreNos from './routes/sobre';
 import Contato from './routes/contato';
+import Pagamento from './routes/pagamento';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -23,6 +24,7 @@ root.render(
           <Route path='/' element={<Home />} />
           <Route path='/produtos' element={<Produtos />} />
           <Route path='/compra' element={<ComprarProduto />} />
+          <Route path='/pagamento' element={<Pagamento />} />
           <Route path='/sobre' element={<SobreNos />} />
           <Route path='/contato' element={<Contato />} />
           </Route>

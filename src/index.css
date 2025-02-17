@@ -55,6 +55,10 @@ button.backgroundRoxo:active {
   font-weight: bold!important;
 }
 
+.navbar-toggler {
+  border: 2px solid;
+}
+
 .bordaAmarela {
   border: #FFC670!important;
 }

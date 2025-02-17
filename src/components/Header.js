@@ -29,7 +29,7 @@ function Header({itensCarrinho, removerItemCarrinho}) {
               Sobre
             </Nav.Link>
             <Nav.Link as={Link} to="/produtos">
-              Catálogo
+              Produtos
             </Nav.Link>
             <Nav.Link as={Link} to="/contato">
               Contato
@@ -65,7 +65,11 @@ function Header({itensCarrinho, removerItemCarrinho}) {
           )}
           <div className="mt-3">
             <h5>Total: {formatNumber.format(valorTotal)}</h5>
-            <Button onClick={() => navigate('/compra')} className="mt-2 backgroundAmarelo" disabled={!itensCarrinho.length}>
+            <Button onClick={() => {
+                navigate('/compra');
+                setShowCart(false);
+              }
+            } className="mt-2 backgroundAmarelo" disabled={!itensCarrinho.length}>
               Finalizar Compra
             </Button>
             <Button style={{backgroundColor: 'white', color: 'rgb(78, 39, 89)'}} className="mt-2" disabled={!itensCarrinho.length}>

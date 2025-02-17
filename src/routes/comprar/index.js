@@ -1,9 +1,10 @@
-import { useRef, useState } from "react";
+import QRCode from "qrcode-react";
+import { useEffect, useRef, useState } from "react";
 import { Button, Col, Container, Form, Row, Spinner } from "react-bootstrap";
 import { FaCheckCircle } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
 import ReactInputMask from "react-input-mask";
-import { useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
 export default function ComprarProduto() {
     const { itensCarrinho } = useOutletContext();
@@ -18,27 +19,25 @@ export default function ComprarProduto() {
     });
     const options = { style: 'currency', currency: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 3 }
     const formatNumber = new Intl.NumberFormat('pt-BR', options);
-
-    const [confirmacaoPendente, setConfirmacaoPendente] = useState(true);
-
+    
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
 
     const valorTotal = itensCarrinho.reduce((total, item) => total + item.valor * item.quantidade, 0);
+    const navigate = useNavigate();
 
     const concluirCompra = () => 
     {
         if(!form.checkValidity())
-            setValidated(true);
+            return setValidated(true);
 
-        setValidated(false);
-        setConfirmacaoPendente(false);
+        navigate('/pagamento', {state: {formulario: formData, carrinho: itensCarrinho}});
     }
     return (
         <>
-            {confirmacaoPendente && <Container fluid style={{ height: '90vh', marginTop: '10vh' }}>
+            <Container fluid style={{ height: '90vh', marginTop: '10vh' }}>
                 <Row>
                     <Col md={8} sm={12} className="p-4 rounded order-md-first order-sm-last d-flex flex-column align-items-center justify-content-center">
                         <h2 className="roxo">Finalize sua Compra <FaCartShopping /></h2>
@@ -68,7 +67,7 @@ export default function ComprarProduto() {
                                             mask="(**) *****-****"
                                             value={formData.telefone}
                                             onChange={handleChange}
-                                            required
+                                            required={true}
                                         />
                                     </Form.Group>
                                 </Col>
@@ -82,7 +81,7 @@ export default function ComprarProduto() {
                                     name="email"
                                     value={formData.email}
                                     onChange={handleChange}
-                                    required
+                                    required={true}
                                 />
                             </Form.Group></Col>
                             </Row>
@@ -98,7 +97,7 @@ export default function ComprarProduto() {
                                             mask="***.***.***-**"
                                             value={formData.cpf}
                                             onChange={handleChange}
-                                            required
+                                            required={true}
                                         />
                                     </Form.Group>
                                 </Col>
@@ -111,7 +110,7 @@ export default function ComprarProduto() {
                                             name="dataNascimento"
                                             value={formData.dataNascimento}
                                             onChange={handleChange}
-                                            required
+                                            required={true}
                                         />
                                     </Form.Group>
                                 </Col>
@@ -158,12 +157,7 @@ export default function ComprarProduto() {
                     </Col>
 
                 </Row>
-            </Container>}
-            {!confirmacaoPendente && 
-                <Container fluid>
-
-                </Container>
-            }
+            </Container>
         </>
     );
 }
