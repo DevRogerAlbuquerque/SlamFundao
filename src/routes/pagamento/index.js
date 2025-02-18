@@ -1,4 +1,3 @@
-import QRCode from "qrcode-react";
 import { useEffect, useRef, useState } from "react";
 import { Button, Col, Container, Form, Row, Spinner } from "react-bootstrap";
 import { FaCheckCircle } from "react-icons/fa";
