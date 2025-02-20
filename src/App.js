@@ -20,13 +20,13 @@ function App() {
   }
   
 
-  const removerItemCarrinho = (posicao) => setItensCarrinho(itensCarrinho.filter((produto, index) => index != posicao));
+  const removerItemCarrinho = (posicao) => posicao ? setItensCarrinho(itensCarrinho.filter((produto, index) => index != posicao)) : setItensCarrinho([]);
 
   return (
     <>
     
     <Header itensCarrinho={itensCarrinho} removerItemCarrinho={removerItemCarrinho} />
-      <Outlet context={{adicionarItensCarrinho, itensCarrinho}} />
+      <Outlet context={{adicionarItensCarrinho, itensCarrinho, removerItemCarrinho}} />
       <Footer />
     </>
   );

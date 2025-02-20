@@ -72,7 +72,7 @@ function Header({itensCarrinho, removerItemCarrinho}) {
             } className="mt-2 backgroundAmarelo" disabled={!itensCarrinho.length}>
               Finalizar Compra
             </Button>
-            <Button style={{backgroundColor: 'white', color: 'rgb(78, 39, 89)'}} className="mt-2" disabled={!itensCarrinho.length}>
+            <Button onClick={() => removerItemCarrinho()} style={{backgroundColor: 'white', color: 'rgb(78, 39, 89)'}} className="mt-2" disabled={!itensCarrinho.length}>
               Esvaziar Carrinho
             </Button>
           </div>

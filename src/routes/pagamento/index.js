@@ -6,11 +6,10 @@ import { useLocation, useOutletContext } from "react-router-dom";
 
 export default function Pagamento() 
 {
-    const { itensCarrinho } = useOutletContext();
+    const { removerItemCarrinho } = useOutletContext();
     const location = useLocation();
     const {formulario, carrinho} = location.state || {};
     const options = { style: 'currency', currency: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 3 }
-    const formatNumber = new Intl.NumberFormat('pt-BR', options);
     const [meioPagamentoSelecionado, setMeioPagamentoSelecionado] = useState(false);
 /*
     const [gpay, setGpay] = useState(null);
@@ -95,6 +94,7 @@ export default function Pagamento()
           });
 
           setPagamentoFinalizado(true);
+          removerItemCarrinho();
       }
     } catch (error) {
       console.error("Erro ao consultar status do pagamento:", error);
@@ -111,7 +111,7 @@ export default function Pagamento()
       },
       body: JSON.stringify({...{
         valor: 0.01, //carrinho.reduce((total, item) => total + item.valor * item.quantidade, 0),
-        descricao: carrinho.map(item => `${item.nome} - ${item.quantidade}, - ${item.tamanho}`).join(", "),
+        descricao: carrinho.map(item => `${item.quantidade}x ${item.nome} ${item.tamanho}`).join(", "),
         email: formulario.email
       }, ...body})
     })
