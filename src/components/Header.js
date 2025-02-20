@@ -18,7 +18,7 @@ function Header({itensCarrinho, removerItemCarrinho}) {
 
   return (
     <>
-      <Navbar style={{backgroundColor: '#4E2759', top: '0'}} data-bs-theme="light"  expand="lg" className="header">
+      <Navbar style={{backgroundColor: '#4E2759', top: '0'}} data-bs-theme="dark"  expand="lg" className="header">
       <Navbar.Brand as={Link} to="/" className="brand">
           <img src={logoAmarelo} style={{height: '30px'}}/>
         </Navbar.Brand>
@@ -64,7 +64,7 @@ function Header({itensCarrinho, removerItemCarrinho}) {
             <p>O carrinho está vazio.</p>
           )}
           <div className="mt-3">
-            <h5>Total: {formatNumber.format(valorTotal)}</h5>
+            <h5 className='amarelo'>Total: {formatNumber.format(valorTotal)}</h5>
             <Button onClick={() => {
                 navigate('/compra');
                 setShowCart(false);

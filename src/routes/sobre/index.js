@@ -17,7 +17,7 @@ export const SobreNos = () => {
                 <Row style={{ height: '92vh' }}>
                     <Col md={12} className="d-flex flex-column align-items-center justify-content-center">
                         <img height={'200px'} src={logo} alt="Logo Slam Fundão" />
-                        <h5>Do Fundão para o fundão</h5>
+                        <h5 className="amarelo">Do Fundão para o fundão</h5>
                     </Col>
                 </Row>
             </Container>

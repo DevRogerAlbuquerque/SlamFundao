@@ -1,4 +1,3 @@
-import QRCode from "qrcode-react";
 import { useEffect, useRef, useState } from "react";
 import { Button, Col, Container, Form, Row, Spinner } from "react-bootstrap";
 import { FaCheckCircle } from "react-icons/fa";
@@ -102,13 +101,13 @@ export default function ComprarProduto() {
                                     </Form.Group>
                                 </Col>
                                 <Col>
-                                    <Form.Group controlId="formDataNascimento" className="mb-4">
+                                    <Form.Group controlId="formNascimento" className="mb-4">
                                         <Form.Label className="roxo">Data de Nascimento</Form.Label>
                                         <Form.Control
                                             type="date" className="bordaRoxa backgroundAmarelo roxo"
                                             placeholder="__/__/____"
-                                            name="dataNascimento"
-                                            value={formData.dataNascimento}
+                                            name="nascimento"
+                                            value={formData.nascimento}
                                             onChange={handleChange}
                                             required={true}
                                         />

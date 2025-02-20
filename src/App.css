@@ -94,10 +94,6 @@
     background-color: rgb(78, 39, 89); /* Roxo mais claro ao passar o mouse */
     color: #FFC670; /* Amarelo */
   }
-  
-  .mt-3 h5 {
-    color: #FFC670; /* Total em amarelo */
-  }
 
   .offcanvas-header, .offcanvas-body {
     background-color: rgb(78, 39, 89);
