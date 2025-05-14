@@ -110,7 +110,7 @@ export default function Pagamento()
         "Content-Type": "application/json"
       },
       body: JSON.stringify({...{
-        valor: 0.01, //carrinho.reduce((total, item) => total + item.valor * item.quantidade, 0),
+        valor: carrinho.reduce((total, item) => total + item.valor * item.quantidade, 0),
         descricao: carrinho.map(item => `${item.quantidade}x ${item.nome} ${item.tamanho}`).join(", "),
         email: formulario.email
       }, ...body})

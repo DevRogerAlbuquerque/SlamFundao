@@ -31,9 +31,9 @@ export default function Produtos() {
     }
         
     const produtos = [
-        { nome: 'Camiseta Off-White', valor: 50, imagem: camisaBranca, imagens: 'images/camisetas/branca/' },
-        { nome: 'Camiseta Amarela', valor: 50, imagem: camisaAmarela, imagens: 'images/camisetas/amarela/' },
-        { nome: 'Camiseta Roxa', valor: 50, imagem: camisaRoxa, imagens: 'images/camisetas/roxa/' },
+        { nome: 'Camiseta Off-White', valor: 60, imagem: camisaBranca, imagens: 'images/camisetas/branca/' },
+        { nome: 'Camiseta Amarela', valor: 60, imagem: camisaAmarela, imagens: 'images/camisetas/amarela/' },
+        { nome: 'Camiseta Roxa', valor: 60, imagem: camisaRoxa, imagens: 'images/camisetas/roxa/' },
     ];
 
     return (
