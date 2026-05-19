@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Navbar, Nav, Offcanvas, Button, ListGroup } from 'react-bootstrap';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaShoppingCart, FaTimes } from 'react-icons/fa';
 import logoAmarelo from '../imagens/logoAmarelo.png';
 import { FaCartShopping } from 'react-icons/fa6';
@@ -20,7 +20,7 @@ function Header({itensCarrinho, removerItemCarrinho}) {
     <>
       <Navbar style={{backgroundColor: '#4E2759', top: '0'}} data-bs-theme="dark"  expand="lg" className="header">
       <Navbar.Brand as={Link} to="/" className="brand">
-          <img src={logoAmarelo} style={{height: '30px'}}/>
+          <img src={logoAmarelo} style={{height: '30px'}} alt="logo"/>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

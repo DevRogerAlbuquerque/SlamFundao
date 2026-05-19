@@ -1,7 +1,5 @@
 import { Button, Col, Container, Form, Row, Spinner } from "react-bootstrap";
-import Footer from '../../components/Footer';
 import { useRef, useState } from "react";
-import { FaCheck } from "react-icons/fa";
 import ReactInputMask from "react-input-mask";
 import { Toast } from "primereact/toast";
 

@@ -20,7 +20,7 @@ function App() {
   }
   
 
-  const removerItemCarrinho = (posicao) => posicao ? setItensCarrinho(itensCarrinho.filter((produto, index) => index != posicao)) : setItensCarrinho([]);
+  const removerItemCarrinho = (posicao) => posicao ? setItensCarrinho(itensCarrinho.filter((produto, index) => index !== posicao)) : setItensCarrinho([]);
 
   return (
     <>

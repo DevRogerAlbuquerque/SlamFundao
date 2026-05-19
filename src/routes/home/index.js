@@ -1,6 +1,5 @@
 import { Button, Carousel, Col, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import Footer from "../../components/Footer";
 
 import logo from "../../imagens/logobanner.png";
 import coroa from "../../imagens/coroa.png";

@@ -9,7 +9,6 @@ export default function Pagamento()
     const { removerItemCarrinho } = useOutletContext();
     const location = useLocation();
     const {formulario, carrinho} = location.state || {};
-    const options = { style: 'currency', currency: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 3 }
     const [meioPagamentoSelecionado, setMeioPagamentoSelecionado] = useState(false);
 /*
     const [gpay, setGpay] = useState(null);

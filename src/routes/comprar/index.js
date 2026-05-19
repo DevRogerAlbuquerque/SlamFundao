@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import { Button, Col, Container, Form, Row, Spinner } from "react-bootstrap";
+import { useState } from "react";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { FaCheckCircle } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
 import ReactInputMask from "react-input-mask";

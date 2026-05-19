@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useOutletContext } from "react-router-dom";
-import { Container, Button, Form, Carousel } from "react-bootstrap";
+import { Container, Form, Carousel } from "react-bootstrap";
 import { FaCartShopping, FaReply } from "react-icons/fa6";
 import { Toast } from "primereact/toast";
 import camisaBranca from "../../imagens/camisaBranca2.jpg";

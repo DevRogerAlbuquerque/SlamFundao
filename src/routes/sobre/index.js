@@ -6,7 +6,7 @@ import comoSurgiu from "../../imagens/comoSurgiu.jpg";
 import oficinaMaior from "../../imagens/oficinaMaior.jpg";
 import oficinaPimentas from "../../imagens/oficinaPimentas.jpg";
 import imagemOficina from "../../imagens/imagemOficina.jpg";
-import "./SobreNos.css";
+import "./index.css";
 
 /* ── hook: fade-in ao entrar na viewport ── */
 function useFadeIn(threshold = 0.18) {

@@ -1,5 +1,4 @@
-import React from 'react';
-import { FaFacebook, FaInstagram, FaTwitter, FaWhatsapp } from 'react-icons/fa';
+import { FaFacebook, FaInstagram, FaWhatsapp } from 'react-icons/fa';
 
 function Footer() {
   return (
