@@ -1,28 +1,47 @@
-import { Button, Col, Container, Row } from "react-bootstrap";
-import './styles/produto.css';
+import { Button } from "react-bootstrap";
+import "./styles/produto.css";
 import { FaEye } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
 
-export const Produto = ({src, alt, descricao, valor, onClick}) => {
-  const options = { style: 'currency', currency: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 3 }
-  const formatNumber = new Intl.NumberFormat('pt-BR', options);
+export const Produto = ({ src, alt, descricao, valor, onClick }) => {
+  const formatNumber = new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+    minimumFractionDigits: 2,
+  });
+
   return (
-    <Container className="produto" style={{ width: '100%' }} fluid>
-      <Row>
-        <Col className="p-0 mx-3">
-          <img style={{borderRadius: '5% 0%', objectFit: 'cover'}} src={src} height={"470px"} alt={alt} />
-          <Button className="comprar-button" onClick={onClick}><FaEye /> Visualizar</Button>
-        </Col>
-      </Row>
-      <Row>
-        <Col className="descricao mx-3" style={{backgroundColor: '#FFC670', border: '5px solid rgb(78, 39, 89)'}}>{descricao}</Col>
-      </Row>
-      <Row>
-        <Col className="descricao rounded-bottom mx-3" style={{backgroundColor: 'rgb(78, 39, 89)', 
-          color: 'white', borderBottom: '1px solid black'}}>Valor: {formatNumber.format(valor)}</Col>
-      </Row>
-    </Container>
+    <div className="produto-card" onClick={onClick} role="button" tabIndex={0}>
+      {/* IMAGEM */}
+      <div className="produto-img-wrapper">
+        <img src={src} alt={alt || descricao} />
+
+        {/* CTA OVERLAY (desktop) */}
+        <div className="produto-overlay">
+          <FaEye />
+          <span>Visualizar</span>
+        </div>
+      </div>
+
+      {/* INFO */}
+      <div className="produto-info">
+        <h5 className="produto-nome">{descricao}</h5>
+        <span className="produto-preco">
+          {formatNumber.format(valor)}
+        </span>
+
+        {/* CTA MOBILE */}
+        <Button
+          className="produto-btn-mobile"
+          onClick={(e) => {
+            e.stopPropagation();
+            onClick();
+          }}
+        >
+          <FaEye /> Ver produto
+        </Button>
+      </div>
+    </div>
   );
-}
+};
 
 export default Produto;

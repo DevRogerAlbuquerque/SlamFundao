@@ -79,7 +79,7 @@ export default function Pagamento()
 
   const checkPaymentStatus = async (paymentId) => {
     try {
-      const response = await fetch(`https://gatewaypagamentos.onrender.com/api/pagamento/${paymentId}`);
+      const response = await fetch(`http://api.slamfundao.com.br/api/pagamento/${paymentId}`);
       const data = await response.json();
 
       if (data.status === "approved") {
@@ -104,7 +104,7 @@ export default function Pagamento()
   const [id, setId] = useState();
   
   const realizarPagamento = (body) => 
-    fetch("https://gatewaypagamentos.onrender.com/api/pagamento", {
+    fetch("http://api.slamfundao.com.br/api/pagamento", {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
