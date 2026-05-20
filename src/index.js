@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
@@ -7,7 +7,7 @@ import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import './App.css';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Produtos from './routes/produtos';
 import ComprarProduto from './routes/comprar';
 import Home from './routes/home/index';
@@ -15,10 +15,23 @@ import SobreNos from './routes/sobre';
 import Contato from './routes/contato';
 import Pagamento from './routes/pagamento';
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
+      {/* O ScrollToTop entra aqui, antes das rotas */}
+      <ScrollToTop /> 
+      
       <Routes>
         <Route element={<App />} >
           <Route path='/' element={<Home />} />
@@ -27,7 +40,7 @@ root.render(
           <Route path='/pagamento' element={<Pagamento />} />
           <Route path='/sobre' element={<SobreNos />} />
           <Route path='/contato' element={<Contato />} />
-          </Route>
+        </Route>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
