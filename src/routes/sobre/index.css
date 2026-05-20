@@ -57,7 +57,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: var(--roxo);
+  background: var(--roxo-escuro);
 }
 
 .sn-hero-bg {
@@ -281,7 +281,7 @@
    STATS BAND
    ════════════════════════════════════════ */
 .sn-stats-band {
-  background: var(--roxo);
+  background: var(--roxo-escuro);
   padding: 4rem 2rem;
   display: grid;
   grid-template-columns: repeat(4, 1fr);

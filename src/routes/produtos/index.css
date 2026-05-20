@@ -71,7 +71,7 @@
   padding: 1.25rem 1rem;
   position: sticky;
   top: 60px;
-  z-index: 100;
+  z-index: 1;
   background: rgba(250, 249, 246, 0.95);
   backdrop-filter: blur(8px);
   border-bottom: 0.5px solid var(--borda);
