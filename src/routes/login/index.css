@@ -1,0 +1,399 @@
+/* ════════════════════════════════════════
+   SLAM FUNDÃO — LOGIN
+   Login.css
+   ════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@1,400&display=swap');
+
+:root {
+  --roxo:       #4E2759;
+  --roxo-esc:   #361940;
+  --roxo-claro: #7a4a8a;
+  --amarelo:    #FFC200;
+  --amarelo-esc:#e0aa00;
+  --off:        #faf9f6;
+  --borda:      rgba(78,39,89,0.14);
+  --erro:       #d63e3e;
+  --ease:       cubic-bezier(0.22, 1, 0.36, 1);
+  --font-title: 'Bebas Neue', sans-serif;
+  --font-body:  'DM Sans', sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+}
+
+/* ── reset ── */
+.ln-root *, .ln-root *::before, .ln-root *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ════════════════════════════════════════
+   LAYOUT SPLIT
+   ════════════════════════════════════════ */
+.ln-root {
+  font-family: var(--font-body);
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* ════════════════════════════════════════
+   PAINEL VISUAL (esquerdo)
+   ════════════════════════════════════════ */
+.ln-visual {
+  position: relative;
+  overflow: hidden;
+  background: var(--roxo-esc);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* fundo com grain + gradientes */
+.ln-visual-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 65% 50% at 25% 75%, rgba(255,194,0,0.13) 0%, transparent 65%),
+    radial-gradient(ellipse 55% 45% at 75% 25%, rgba(122,74,138,0.38) 0%, transparent 65%),
+    var(--roxo-esc);
+}
+
+/* grain */
+.ln-visual-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+/* linhas diagonais decorativas */
+.ln-visual::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    -55deg,
+    transparent,
+    transparent 60px,
+    rgba(255,255,255,0.018) 60px,
+    rgba(255,255,255,0.018) 61px
+  );
+  pointer-events: none;
+}
+
+.ln-visual-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 3rem;
+  text-align: center;
+  animation: fadeUp 0.9s var(--ease) both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.ln-visual-logo {
+  height: 120px;
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.45));
+}
+
+.ln-visual-verso {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  color: var(--amarelo);
+  line-height: 1.6;
+  max-width: 340px;
+  border: none;
+  padding: 0;
+}
+
+.ln-visual-pills {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.ln-visual-pills span {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+}
+
+/* ════════════════════════════════════════
+   PAINEL FORMULÁRIO (direito)
+   ════════════════════════════════════════ */
+.ln-form-panel {
+  background: var(--off);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+}
+
+.ln-form-inner {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  animation: fadeUp 0.75s 0.1s var(--ease) both;
+}
+
+/* logo só aparece no mobile */
+.ln-logo-mobile {
+  display: none;
+  height: 72px;
+  margin: 0 auto;
+}
+
+/* ── heading ── */
+.ln-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ln-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--roxo-claro);
+  font-weight: 500;
+}
+
+.ln-h1 {
+  font-family: var(--font-title);
+  font-size: 3rem;
+  color: var(--roxo);
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
+.ln-subtitle {
+  font-size: 14px;
+  color: #888;
+  line-height: 1.6;
+  margin-top: 2px;
+}
+
+/* ── form ── */
+.ln-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.ln-campo {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.ln-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--roxo-claro);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ln-label-icon { font-size: 10px; opacity: 0.75; }
+
+.ln-input {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--roxo);
+  background: #fff;
+  border: 1.5px solid var(--borda);
+  border-radius: 12px;
+  padding: 13px 16px;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  -webkit-appearance: none;
+}
+
+.ln-input:focus {
+  border-color: var(--roxo);
+  box-shadow: 0 0 0 3px rgba(78,39,89,0.1);
+}
+
+.ln-input::placeholder { color: #ccc; }
+
+/* campo de senha com botão olho */
+.ln-senha-wrap {
+  position: relative;
+}
+
+.ln-senha-wrap .ln-input {
+  padding-right: 48px;
+}
+
+.ln-olho {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #bbb;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.ln-olho:hover { color: var(--roxo); }
+
+/* ── erro ── */
+.ln-erro {
+  font-size: 13px;
+  color: var(--erro);
+  background: rgba(214,62,62,0.07);
+  border-radius: 10px;
+  padding: 11px 14px;
+  line-height: 1.5;
+  border-left: 3px solid var(--erro);
+}
+
+/* ── botões ── */
+.ln-btn {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  padding: 14px 24px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  width: 100%;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.ln-btn:active { transform: scale(0.98); }
+
+.ln-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.ln-btn--roxo {
+  background: var(--roxo);
+  color: #fff;
+}
+
+.ln-btn--roxo:hover:not(:disabled) {
+  background: var(--roxo-esc);
+  box-shadow: 0 8px 24px rgba(78,39,89,0.28);
+  transform: translateY(-1px);
+}
+
+.ln-btn--ghost {
+  background: transparent;
+  color: var(--roxo);
+  border: 1.5px solid var(--borda);
+}
+
+.ln-btn--ghost:hover {
+  background: rgba(78,39,89,0.05);
+}
+
+/* link simples */
+.ln-link {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--roxo-claro);
+  text-align: center;
+  padding: 4px 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+.ln-link:hover { color: var(--roxo); }
+
+/* spinner */
+.ln-spin {
+  animation: spin 0.85s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ════════════════════════════════════════
+   RESET ENVIADO
+   ════════════════════════════════════════ */
+.ln-reset-ok {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+  padding: 1rem 0;
+  animation: fadeUp 0.4s var(--ease) both;
+}
+
+.ln-reset-icon { font-size: 3rem; line-height: 1; }
+
+.ln-reset-ok h3 {
+  font-family: var(--font-title);
+  font-size: 1.8rem;
+  color: var(--roxo);
+  letter-spacing: 0.02em;
+}
+
+.ln-reset-ok p {
+  font-size: 14px;
+  color: #888;
+  line-height: 1.7;
+  max-width: 320px;
+}
+
+/* ════════════════════════════════════════
+   RESPONSIVO
+   ════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .ln-root {
+    grid-template-columns: 1fr;
+  }
+
+  .ln-visual { display: none; }
+
+  .ln-form-panel {
+    min-height: 100vh;
+    padding: 5vh 1.5rem 3rem;
+    align-items: flex-start;
+    padding-top: 10vh;
+  }
+
+  .ln-logo-mobile { display: block; }
+
+  .ln-h1 { font-size: 2.5rem; }
+}

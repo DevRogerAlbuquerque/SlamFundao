@@ -96,8 +96,15 @@
   }
 
   .offcanvas-header, .offcanvas-body {
-    background-color: rgb(78, 39, 89);
     color: #FFC670;
+  }
+
+  .offcanvas-header {
+    background-color: var(--roxo-escuro)
+  }
+
+  .offcanvas-body {
+    background-color: var(--roxo-escuro);
   }
   
   .mt-3 button {

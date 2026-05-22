@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Navbar, Nav, Offcanvas, Button, ListGroup } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaShoppingCart, FaTimes } from 'react-icons/fa';
+import { FaShoppingCart, FaSignOutAlt, FaTimes } from 'react-icons/fa';
 import logoAmarelo from '../imagens/logoAmarelo.png';
 import { FaCartShopping } from 'react-icons/fa6';
+import { signOut } from 'firebase/auth';
+import { auth } from '../firebase';
 
-function Header({itensCarrinho, removerItemCarrinho}) {
+function Header({itensCarrinho, removerItemCarrinho, setUsuario, usuario}) {
   const [showCart, setShowCart] = useState(false);
 
   const handleShowCart = () => setShowCart(true);
@@ -34,6 +36,14 @@ function Header({itensCarrinho, removerItemCarrinho}) {
             <Nav.Link as={Link} to="/contato">
               Contato
             </Nav.Link>
+            {usuario && <Button 
+              variant="outline" 
+              className="cart-button ms-auto" 
+              onClick={() => signOut(auth).then(() => {
+                setUsuario(undefined);
+              })}>
+              <b><FaSignOutAlt /> Sair</b>
+            </Button>}
             <Button 
               variant="outline" 
               className="cart-button ms-auto" 

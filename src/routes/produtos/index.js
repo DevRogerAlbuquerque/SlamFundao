@@ -1,71 +1,59 @@
 import { useEffect, useRef, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { Container, Form, Carousel } from "react-bootstrap";
-import { FaCartShopping, FaReply } from "react-icons/fa6";
+import { FaCartShopping, FaReply, FaTrash, FaPen, FaCheck, FaXmark, FaSpinner } from "react-icons/fa6";
 import { Toast } from "primereact/toast";
-import camisaBranca from "../../imagens/camisaBranca2.jpg";
-import camisaAmarela from "../../imagens/camisaAmarela.jpg";
-import camisaRoxa from "../../imagens/brancaRoxa.jpg";
+import {
+  collection, onSnapshot, addDoc, updateDoc, deleteDoc,
+  doc, serverTimestamp,
+} from "firebase/firestore";
+import { db } from "../../firebase";
 import "./index.css";
+import { FaPlusCircle } from "react-icons/fa";
+import { useToast } from "../../context/ToastContext";
 
-/* ─── dados dos produtos ─── */
-const produtos = [
-  {
-    id: 0,
-    nome: "Camiseta Off-White",
-    valor: 60,
-    imagem: camisaBranca,
-    imagens: "images/camisetas/branca/",
-    capitulo: "Capítulo I",
-    subtitulo: "A origem",
-    verso:
-      '"Em branco não há ausência — há espaço para tudo começar."',
-    narrativa: [
-      "A Off-White nasceu da vontade de criar algo limpo — sem ruído. Uma tela que carrega o logo do Slam Fundão como se ele tivesse sempre estado ali, esperando ser descoberto.",
-      "Feita completamente à mão, costurada com o mesmo cuidado de um poema que não pode perder nenhuma vírgula.",
-    ],
-    destaque:
-      '"O branco é o começo de toda história. É a página antes da primeira palavra."',
-  },
-  {
-    id: 1,
-    nome: "Camiseta Amarela",
-    valor: 60,
-    imagem: camisaAmarela,
-    imagens: "images/camisetas/amarela/",
-    capitulo: "Capítulo II",
-    subtitulo: "O grito",
-    verso:
-      '"Amarelo é o tom da voz quando ela finalmente grita o que sempre quis dizer."',
-    narrativa: [
-      "Se a Off-White é o silêncio antes do poema, a Amarela é o momento em que a voz sobe. É a cor do palco, do holofote, da coragem de se colocar de pé e falar.",
-      "Tingida à mão, cada peça tem nuances únicas — assim como cada slam tem sua própria frequência.",
-    ],
-    destaque:
-      '"Há cores que sussurram. O amarelo não — ele declama."',
-  },
-  {
-    id: 2,
-    nome: "Camiseta Roxa",
-    valor: 60,
-    imagem: camisaRoxa,
-    imagens: "images/camisetas/roxa/",
-    capitulo: "Capítulo III",
-    subtitulo: "A identidade",
-    verso:
-      '"O roxo é a cor da tinta que não seca — a que permanece depois que tudo foi dito."',
-    narrativa: [
-      "O roxo do Slam Fundão não é uma escolha estética — é uma declaração. É a cor da comunidade, da periferia que cria, da arte que resiste.",
-      "Feita à mão, carregada de intenção. Quem veste sabe o que carrega.",
-    ],
-    destaque:
-      '"Roxo é a cor do Fundão. Da noite que vira verso. Da raiz que não se apaga."',
-  },
-];
+const IS_ADMIN = window.location.hostname === 'admin.slamfundao.com.br'
+              || window.location.hostname === 'localhost';
 
 const TAMANHOS = ["P", "M", "G", "GG"];
 
-/* ─── subcomponente: visão de detalhe ─── */
+const PRODUTO_VAZIO = {
+  nome: "", valor: "", capitulo: "", subtitulo: "",
+  verso: "", destaque: "", narrativa: "", imagem: "", imagens: "",
+};
+
+/* ══ CAMPO — fora de qualquer componente pai para evitar recriação ══ */
+function Campo({ label, name, tipo = "text", placeholder, linhas, form, erros, onChange }) {
+  return (
+    <div className="edicao-campo">
+      <label className="edicao-label">
+        {label}
+        {erros[name] && <span className="edicao-erro"> — {erros[name]}</span>}
+      </label>
+      {linhas ? (
+        <textarea
+          className={`edicao-input ${erros[name] ? "edicao-input--erro" : ""}`}
+          name={name}
+          value={form[name]}
+          onChange={onChange}
+          placeholder={placeholder}
+          rows={linhas}
+        />
+      ) : (
+        <input
+          className={`edicao-input ${erros[name] ? "edicao-input--erro" : ""}`}
+          type={tipo}
+          name={name}
+          value={form[name]}
+          onChange={onChange}
+          placeholder={placeholder}
+        />
+      )}
+    </div>
+  );
+}
+
+/* ══ DETALHE ══ */
 function DetalheView({ produto, onVoltar, onComprar }) {
   const [tamanhoSelecionado, setTamanhoSelecionado] = useState("M");
   const [quantidade, setQuantidade] = useState(1);
@@ -73,74 +61,50 @@ function DetalheView({ produto, onVoltar, onComprar }) {
   return (
     <div className="detalhe-view">
       <div className="detalhe-grid">
-        {/* carrossel */}
         <div className="detalhe-carousel-wrap">
           <Carousel>
             {[1, 2, 3, 4].map((item) => (
               <Carousel.Item key={item}>
-                <img
-                  className="detalhe-img"
+                <img className="detalhe-img"
                   src={`${produto.imagens}${item}.jpg`}
-                  alt={`${produto.nome} — foto ${item}`}
-                />
+                  alt={`${produto.nome} — foto ${item}`} />
               </Carousel.Item>
             ))}
           </Carousel>
         </div>
 
-        {/* info */}
         <div className="detalhe-info">
           <span className="detalhe-capitulo">{produto.capitulo}</span>
           <h1 className="detalhe-titulo">{produto.nome}</h1>
-
           <blockquote className="detalhe-verso">{produto.verso}</blockquote>
-
           <p className="detalhe-desc">
             Nossa camisa do Slam Fundão é confeccionada em 100% algodão,
             garantindo conforto e durabilidade. Feita totalmente à mão, ela
             carrega o cuidado e a exclusividade de um produto artesanal.
           </p>
-
           <div className="detalhe-preco">
             <span className="preco-moeda">R$</span>
             <span className="preco-valor">{produto.valor}</span>
           </div>
-
-          {/* tamanho */}
           <div className="detalhe-secao">
             <span className="secao-label">Tamanho</span>
             <div className="tamanhos-row">
-              {TAMANHOS.map((t) => (
-                <button
-                  key={t}
+              {TAMANHOS.map(t => (
+                <button key={t}
                   className={`tamanho-btn ${tamanhoSelecionado === t ? "ativo" : ""}`}
-                  onClick={() => setTamanhoSelecionado(t)}
-                >
-                  {t}
-                </button>
+                  onClick={() => setTamanhoSelecionado(t)}>{t}</button>
               ))}
             </div>
           </div>
-
-          {/* quantidade */}
           <div className="detalhe-secao">
             <span className="secao-label">Quantidade: {quantidade}</span>
-            <Form.Range
-              min={1}
-              max={10}
-              step={1}
-              value={quantidade}
-              onChange={(e) => setQuantidade(Number(e.target.value))}
-              className="custom-range quantidade-range"
-            />
+            <Form.Range min={1} max={10} step={1} value={quantidade}
+              onChange={e => setQuantidade(Number(e.target.value))}
+              className="custom-range quantidade-range" />
           </div>
-
-          {/* ações */}
           <div className="detalhe-acoes">
-            <button
-              className="btn-comprar"
-              onClick={() => onComprar({ ...produto, quantidade, tamanho: tamanhoSelecionado })}
-            >
+            <button className="btn-comprar"
+              onClick={() => onComprar({ ...produto, quantidade, tamanho: tamanhoSelecionado })}>
               <FaCartShopping /> Adicionar ao carrinho
             </button>
             <button className="btn-voltar" onClick={onVoltar}>
@@ -153,72 +117,69 @@ function DetalheView({ produto, onVoltar, onComprar }) {
   );
 }
 
-/* ─── subcomponente: card do catálogo ─── */
-function ProdutoCard({ produto, onAbrir }) {
+/* ══ CARD DE VISUALIZAÇÃO ══ */
+function ProdutoCard({ produto, onAbrir, onEditar, onExcluir }) {
   const [hovered, setHovered] = useState(false);
   const sectionRef = useRef(null);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
-      { threshold: 0.15 }
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) setVisible(true); }, { threshold: 0.15 }
     );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
+    if (sectionRef.current) obs.observe(sectionRef.current);
+    return () => obs.disconnect();
   }, []);
 
+  const linhas = typeof produto.narrativa === "string"
+    ? produto.narrativa.split("\n").filter(l => l.trim())
+    : (produto.narrativa || []);
+
   return (
-    <section
-      ref={sectionRef}
+    <section ref={sectionRef}
       className={`produto-section ${visible ? "visivel" : ""}`}
-      id={`produto-${produto.id}`}
-    >
+      id={`produto-${produto.id}`}>
       <div className="produto-section-inner">
-        {/* card imagem */}
-        <div
-          className="card-imagem-wrap"
+
+        <div className="card-imagem-wrap"
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
-          onTouchStart={() => setHovered((h) => !h)}
+          onTouchStart={() => setHovered(h => !h)}
           onClick={() => onAbrir(produto)}
-          role="button"
-          tabIndex={0}
-          onKeyDown={(e) => e.key === "Enter" && onAbrir(produto)}
-          aria-label={`Ver detalhes de ${produto.nome}`}
-        >
-          <img src={produto.imagem} alt={produto.nome} className="card-imagem" />
+          role="button" tabIndex={0}
+          onKeyDown={e => e.key === "Enter" && onAbrir(produto)}
+          aria-label={`Ver detalhes de ${produto.nome}`}>
+          <img src={`../../images/${produto.imagem}`} alt={produto.nome} className="card-imagem" />
           <div className={`card-overlay ${hovered ? "visivel" : ""}`}>
             <p className="overlay-verso">{produto.verso}</p>
             <p className="overlay-hint">clique para ver mais</p>
           </div>
+
+          {IS_ADMIN && (
+            <div className="adm-card-acoes">
+              <button className="adm-card-btn adm-card-btn--edit"
+                onClick={e => { e.stopPropagation(); onEditar(produto); }}
+                title="Editar"><FaPen /></button>
+              <button className="adm-card-btn adm-card-btn--del"
+                onClick={e => { e.stopPropagation(); onExcluir(produto); }}
+                title="Excluir"><FaTrash /></button>
+            </div>
+          )}
         </div>
 
-        {/* narrativa */}
         <div className="produto-narrativa">
           <span className="narrativa-capitulo">{produto.capitulo}</span>
           <h2 className="narrativa-nome">{produto.nome}</h2>
           <span className="narrativa-subtitulo">{produto.subtitulo}</span>
-
-          <blockquote className="narrativa-destaque">
-            {produto.destaque}
-          </blockquote>
-
-          {produto.narrativa.map((p, i) => (
-            <p key={i} className="narrativa-texto">{p}</p>
-          ))}
-
+          <blockquote className="narrativa-destaque">{produto.destaque}</blockquote>
+          {linhas.map((p, i) => <p key={i} className="narrativa-texto">{p}</p>)}
           <div className="narrativa-tamanhos">
-            {TAMANHOS.map((t) => (
-              <span key={t} className="tamanho-pill">{t}</span>
-            ))}
+            {TAMANHOS.map(t => <span key={t} className="tamanho-pill">{t}</span>)}
           </div>
-
           <div className="narrativa-preco">
             <span className="preco-moeda">R$</span>
             <span className="preco-valor">{produto.valor}</span>
           </div>
-
           <button className="btn-ver" onClick={() => onAbrir(produto)}>
             <FaCartShopping /> Quero essa
           </button>
@@ -228,17 +189,131 @@ function ProdutoCard({ produto, onAbrir }) {
   );
 }
 
-/* ─── subcomponente: trilha de progresso ─── */
-function Trilha({ visitados, ativo, onNavegar }) {
+/* ══ CARD DE INCLUSÃO / EDIÇÃO INLINE ══ */
+function CardEdicao({ inicial = PRODUTO_VAZIO, onSalvar, onCancelar, salvando }) {
+  const [form, setForm] = useState({ ...PRODUTO_VAZIO, ...inicial });
+  const [erros, setErros] = useState({});
+  const sectionRef = useRef(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) setVisible(true); }, { threshold: 0.1 }
+    );
+    if (sectionRef.current) obs.observe(sectionRef.current);
+    return () => obs.disconnect();
+  }, []);
+
+  /* onChange estável — não recria a cada render */
+  const handleChange = e => {
+    const { name, value } = e.target;
+    setForm(f => ({ ...f, [name]: value }));
+    setErros(er => ({ ...er, [name]: "" }));
+  };
+
+  const validar = () => {
+    const e = {};
+    if (!form.nome.trim())   e.nome   = "Obrigatório";
+    if (!form.valor)         e.valor  = "Obrigatório";
+    if (!form.imagem.trim()) e.imagem = "Obrigatório";
+    setErros(e);
+    return Object.keys(e).length === 0;
+  };
+
+  const handleSalvar = () => { if (validar()) onSalvar(form); };
+
+  /* props compartilhadas para todos os campos */
+  const campoProps = { form, erros, onChange: handleChange };
+
+  return (
+    <section ref={sectionRef}
+      className={`produto-section ${visible ? "visivel" : ""} edicao-section`}>
+      <div className="edicao-wrap">
+
+        <div className="edicao-header">
+          <div>
+            <span className="edicao-eyebrow">
+              {inicial.id ? "Editando produto" : "Novo produto"}
+            </span>
+            <h2 className="edicao-titulo">
+              {form.nome || (inicial.id ? "Editar" : "Adicionar ao catálogo")}
+            </h2>
+          </div>
+          <button className="edicao-fechar" onClick={onCancelar} title="Cancelar">
+            <FaXmark />
+          </button>
+        </div>
+
+        <div className="edicao-preview-wrap">
+          {form.imagem ? (
+            <img src={`../../images/${form.imagem}`} alt="preview" className="edicao-preview"
+              onError={e => e.target.style.opacity = 0.3} />
+          ) : (
+            <div className="edicao-preview-vazio">
+              <span>Prévia da imagem</span>
+            </div>
+          )}
+          <div className="edicao-preview-campos">
+            <Campo {...campoProps} label="URL da imagem principal *" name="imagem"
+              placeholder="https://... ou /imagens/camiseta.jpg" />
+            <Campo {...campoProps} label="Pasta do carrossel (ex: images/camisetas/nova/)"
+              name="imagens" placeholder="images/camisetas/nova/" />
+          </div>
+        </div>
+
+        <div className="edicao-grid">
+          <Campo {...campoProps} label="Nome do produto *" name="nome" placeholder="Ex: Camiseta Verde" />
+          <Campo {...campoProps} label="Valor (R$) *" name="valor" tipo="number" placeholder="60" />
+          <Campo {...campoProps} label="Capítulo" name="capitulo" placeholder="Ex: Capítulo IV" />
+          <Campo {...campoProps} label="Subtítulo" name="subtitulo" placeholder="Ex: A força" />
+        </div>
+
+        <Campo {...campoProps} label="Verso (aparece no hover da foto)"
+          name="verso" linhas={2}
+          placeholder='"Uma frase poética curta..."' />
+
+        <Campo {...campoProps} label="Destaque (citação em destaque na narrativa)"
+          name="destaque" linhas={2}
+          placeholder='"Frase marcante que resume o produto..."' />
+
+        <Campo {...campoProps}
+          label="Narrativa (use Enter para separar parágrafos)"
+          name="narrativa" linhas={5}
+          placeholder={"Primeiro parágrafo da história...\n\nSegundo parágrafo..."} />
+
+        <div className="edicao-acoes">
+          <button className="btn-voltar" onClick={onCancelar}>
+            <FaXmark /> Cancelar
+          </button>
+          <button className="btn-comprar" onClick={handleSalvar} disabled={salvando}>
+            {salvando
+              ? <><FaSpinner className="adm-spin" /> Salvando...</>
+              : <><FaCheck /> {inicial.id ? "Salvar alterações" : "Publicar produto"}</>}
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ══ BOTÃO FLUTUANTE ══ */
+function BotaoAdicionar({ onClick }) {
+  return (
+    <div className="adm-fab" onClick={onClick} title="Adicionar produto" role="button" tabIndex={0}>
+      <FaPlusCircle />
+    </div>
+  );
+}
+
+/* ══ TRILHA ══ */
+function Trilha({ produtos, visitados, ativo, onNavegar }) {
   return (
     <nav className="trilha" aria-label="Navegação do catálogo">
-      {produtos.map((p, i) => (
+      {produtos.filter(x => x.subtitulo).map((p, i) => (
         <div key={p.id} className="trilha-item">
           <button
             className={`trilha-step ${visitados.includes(i) ? "visitado" : ""} ${ativo === i ? "ativo" : ""}`}
-            onClick={() => onNavegar(i)}
-            aria-label={`Ir para ${p.nome}`}
-          >
+            onClick={() => onNavegar(i)} aria-label={`Ir para ${p.nome}`}>
             <span className="trilha-dot" />
             <span className="trilha-label">{p.subtitulo}</span>
           </button>
@@ -251,76 +326,132 @@ function Trilha({ visitados, ativo, onNavegar }) {
   );
 }
 
-/* ─── componente principal ─── */
+/* ══ COMPONENTE PRINCIPAL ══ */
 export default function Produtos() {
-  const [produtoDetalhado, setProdutoDetalhado] = useState(null);
-  const [visitados, setVisitados] = useState([]);
-  const [ativo, setAtivo] = useState(0);
-  const toast = useRef(null);
   const { adicionarItensCarrinho } = useOutletContext();
+  const { showToast } = useToast();
+
+  const [lista,            setLista]            = useState([]);
+  const [carregando,       setCarregando]        = useState(true);
+  const [produtoDetalhado, setProdutoDetalhado]  = useState(null);
+  const [modoEdicao,       setModoEdicao]        = useState(false);
+  const [salvando,         setSalvando]          = useState(false);
+  const [visitados,        setVisitados]         = useState([]);
+  const [ativo,            setAtivo]             = useState(0);
   const sectionsRef = useRef([]);
 
-  /* scroll spy */
   useEffect(() => {
-    if (produtoDetalhado) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const idx = Number(entry.target.dataset.idx);
-            setAtivo(idx);
-            setVisitados((prev) => (prev.includes(idx) ? prev : [...prev, idx]));
-          }
-        });
-      },
-      { threshold: 0.4 }
-    );
-    sectionsRef.current.forEach((el) => { if (el) observer.observe(el); });
-    return () => observer.disconnect();
-  }, [produtoDetalhado]);
+    const unsub = onSnapshot(collection(db, "produtos"), snap => {
+      const docs = snap.docs
+        .map(d => ({ id: d.id, ...d.data() }))
+        .sort((a, b) => (a.ordem ?? 0) - (b.ordem ?? 0));
+      setLista(docs);
+      setCarregando(false);
+    }, err => { console.error(err); setCarregando(false); });
+    return unsub;
+  }, []);
 
-  const navegarPara = (idx) => {
-    const el = document.getElementById(`produto-${idx}`);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+  useEffect(() => {
+    if (produtoDetalhado || modoEdicao) return;
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const idx = Number(e.target.dataset.idx);
+          setAtivo(idx);
+          setVisitados(prev => prev.includes(idx) ? prev : [...prev, idx]);
+        }
+      });
+    }, { threshold: 0.4 });
+    sectionsRef.current.forEach(el => { if (el) obs.observe(el); });
+    return () => obs.disconnect();
+  }, [produtoDetalhado, modoEdicao, lista]);
+
+  const navegarPara = idx => {
+    document.getElementById(`produto-${lista[idx]?.id}`)
+      ?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const comprar = (item) => {
+  const comprar = item => {
     adicionarItensCarrinho(item);
-    toast.current.show({
-      severity: "success",
-      summary: "Slam Fundão informa:",
-      detail: "Seu produto foi adicionado ao carrinho!",
-      life: 6000,
-      className: "backgroundAmarelo",
+    showToast({
+      severity: "success", summary: "Slam Fundão informa:",
+      detail: "Seu produto foi adicionado ao carrinho!", className: "backgroundAmarelo",
     });
+    
     setProdutoDetalhado(null);
   };
 
-  /* ── detalhe ── */
-  if (produtoDetalhado) {
-    return (
-      <>
-        <Container fluid className="catalog-container">
-          <DetalheView
-            produto={produtoDetalhado}
-            onVoltar={() => setProdutoDetalhado(null)}
-            onComprar={comprar}
-          />
-        </Container>
-        <Toast ref={toast} position="center" />
-      </>
-    );
-  }
+  const salvar = async (form) => {
 
-  /* ── catálogo narrativo ── */
+    if (Array.isArray(form.narrativa))
+      return;
+
+    setSalvando(true);
+    try {
+      const dados = {
+        nome:      form.nome.trim(),
+        valor:     Number(form.valor),
+        capitulo:  form.capitulo.trim(),
+        subtitulo: form.subtitulo.trim(),
+        verso:     form.verso.trim(),
+        destaque:  form.destaque.trim(),
+        narrativa: form.narrativa.trim(),
+        imagem:    form.imagem.trim(),
+        imagens:   form.imagens.trim(),
+        atualizadoEm: serverTimestamp(),
+      };
+
+      if (modoEdicao?.id) {
+        await updateDoc(doc(db, "produtos", modoEdicao.id), dados);
+        showToast({ severity: "success", summary: "Produto atualizado!", life: 4000, className: "backgroundAmarelo"});
+      } else {
+        await addDoc(collection(db, "produtos"), {
+          ...dados, ordem: lista.length, criadoEm: serverTimestamp(),
+        });
+        showToast({ severity: "success", summary: "Produto publicado!", life: 4000, className: "backgroundAmarelo" });
+      }
+      setModoEdicao(false);
+    } catch (err) {
+      console.error(err);
+      showToast({ severity: "success", summary: "Erro ao salvar.", life: 5000, className: "backgroundAmarelo" });
+    } finally {
+      setSalvando(false);
+    }
+  };
+
+  const excluir = async produto => {
+    if (!window.confirm(`Excluir "${produto.nome}"? Esta ação não pode ser desfeita.`)) return;
+    try {
+      await deleteDoc(doc(db, "produtos", produto.id));
+      showToast({ severity: "success", summary: "Produto removido.", life: 4000 });
+    } catch (err) {
+      console.error(err);
+      showToast({ severity: "success", summary: "Erro ao excluir.", life: 5000 });
+    }
+  };
+
+  if (produtoDetalhado) return (
+    <>
+      <Container fluid className="catalog-container">
+        <DetalheView produto={produtoDetalhado}
+          onVoltar={() => setProdutoDetalhado(null)} onComprar={comprar} />
+      </Container>
+    </>
+  );
+
+  if (carregando) return (
+    <div className="catalog-loading">
+      <FaSpinner className="adm-spin" style={{ fontSize: "2.5rem", color: "#4E2759" }} />
+    </div>
+  );
+
   return (
     <>
       <div className="catalog-container">
-        {/* cabeçalho */}
         <header className="catalog-header">
           <p className="catalog-eyebrow">Drop do Fundão · Coleção 2025</p>
           <h1 className="catalog-titulo">
-            Três cores.<br />Uma poesia.
+            Três cores<br />Três poesias.
           </h1>
           <p className="catalog-subtitulo">
             Role e descubra a história por trás de cada peça. Passe o mouse nas
@@ -328,32 +459,55 @@ export default function Produtos() {
           </p>
         </header>
 
-        {/* trilha fixa */}
-        <Trilha visitados={visitados} ativo={ativo} onNavegar={navegarPara} />
+        <Trilha produtos={lista} visitados={visitados} ativo={ativo} onNavegar={navegarPara} />
 
-        {/* seções */}
         <div>
-          {produtos.map((produto, i) => (
-            <div
-              key={produto.id}
-              ref={(el) => (sectionsRef.current[i] = el)}
-              data-idx={i}
-            >
-              <ProdutoCard produto={produto} onAbrir={setProdutoDetalhado} />
+          {lista.map((produto, i) => (
+            <div key={produto.id} ref={el => sectionsRef.current[i] = el} data-idx={i}>
+              {modoEdicao?.id === produto.id ? (
+                <CardEdicao
+                  inicial={produto}
+                  onSalvar={salvar}
+                  onCancelar={() => setModoEdicao(false)}
+                  salvando={salvando}
+                />
+              ) : (
+                <ProdutoCard
+                  produto={produto}
+                  onAbrir={setProdutoDetalhado}
+                  onEditar={p => {
+                    setModoEdicao(p);
+                    setTimeout(() => document.getElementById(`produto-${p.id}`)
+                      ?.scrollIntoView({ behavior: "smooth" }), 50);
+                  }}
+                  onExcluir={excluir}
+                />
+              )}
             </div>
           ))}
+
+          {IS_ADMIN && modoEdicao === "novo" && (
+            <CardEdicao
+              onSalvar={salvar}
+              onCancelar={() => setModoEdicao(false)}
+              salvando={salvando}
+            />
+          )}
         </div>
 
-        {/* rodapé */}
         <footer className="catalog-footer">
           <p className="footer-verso">
-            "Três camisetas. Três capítulos de uma história que ainda está sendo
-            escrita — por você."
+            "Cada peça, um capítulo de uma história que ainda está sendo escrita — por você."
           </p>
         </footer>
       </div>
 
-      <Toast ref={toast} position="center" />
+      {IS_ADMIN && !modoEdicao && (
+        <BotaoAdicionar onClick={() => {
+          setModoEdicao("novo");
+          setTimeout(() => window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" }), 50);
+        }} />
+      )}
     </>
   );
 }

@@ -3,9 +3,11 @@ import './App.css';
 import Header from './components/Header';
 import { useState } from 'react';
 import Footer from './components/Footer';
+import { useAuth } from './context/AuthContext';
 
 function App() {
   const [itensCarrinho, setItensCarrinho] = useState([]);
+  const { usuario, setUsuario } = useAuth();
 
   const adicionarItensCarrinho = (item) => {
     let produtos = [...itensCarrinho];
@@ -25,7 +27,7 @@ function App() {
   return (
     <>
     
-    <Header itensCarrinho={itensCarrinho} removerItemCarrinho={removerItemCarrinho} />
+    <Header usuario={usuario} setUsuario={setUsuario} itensCarrinho={itensCarrinho} removerItemCarrinho={removerItemCarrinho}  />
       <Outlet context={{adicionarItensCarrinho, itensCarrinho, removerItemCarrinho}} />
       <Footer />
     </>
