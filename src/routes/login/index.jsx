@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaEnvelope, FaLock, FaEye, FaEyeSlash, FaSpinner } from "react-icons/fa6";
-import { signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
+import { signInWithEmailAndPassword, sendPasswordResetEmail, setPersistence, browserSessionPersistence } from "firebase/auth";
 import logo from "../../imagens/logobanner.png";
 import "./index.css";
 import { auth } from "../../firebase";
@@ -37,8 +37,9 @@ export default function Login() {
     setLoading(true);
     setErro("");
     try {
+      await setPersistence(auth, browserSessionPersistence);
       await signInWithEmailAndPassword(auth, email, senha);
-      navigate("/");
+      navigate("/produtos");
     } catch (err) {
       setErro(traduzirErro(err.code));
     } finally {

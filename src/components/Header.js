@@ -21,21 +21,21 @@ function Header({itensCarrinho, removerItemCarrinho, setUsuario, usuario}) {
   return (
     <>
       <Navbar style={{backgroundColor: '#4E2759', top: '0'}} data-bs-theme="dark"  expand="lg" className="header">
-      <Navbar.Brand as={Link} to="/" className="brand">
+      <Navbar.Brand as={Link} to={usuario ? "/produtos" : "/"} className="brand">
           <img src={logoAmarelo} style={{height: '30px'}} alt="logo"/>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
-            <Nav.Link as={Link} to="/sobre">
+            {!usuario && <Nav.Link as={Link} to="/sobre">
               Sobre
-            </Nav.Link>
+            </Nav.Link>}
             <Nav.Link as={Link} to="/produtos">
               Produtos
             </Nav.Link>
-            <Nav.Link as={Link} to="/contato">
+            {!usuario && <Nav.Link as={Link} to="/contato">
               Contato
-            </Nav.Link>
+            </Nav.Link>}
             {usuario && <Button 
               variant="outline" 
               className="cart-button ms-auto" 
@@ -44,12 +44,12 @@ function Header({itensCarrinho, removerItemCarrinho, setUsuario, usuario}) {
               })}>
               <b><FaSignOutAlt /> Sair</b>
             </Button>}
-            <Button 
+            {!usuario && <Button 
               variant="outline" 
               className="cart-button ms-auto" 
               onClick={handleShowCart}>
               <b><FaShoppingCart /> Carrinho</b>
-            </Button>
+            </Button>}
           </Nav>
         </Navbar.Collapse>
       </Navbar>
